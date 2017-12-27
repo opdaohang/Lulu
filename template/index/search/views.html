@@ -1,0 +1,12 @@
+{include file="../template/index/common/header.html"}
+<div class="container">
+	<h3>综合搜索</h3>
+	<form action="{:url('index/search/index')}" method="get" class="form-inline" style="text-align: center;">
+		<input type="text" name="wd" class="form-control" placeholder="" style="min-width: 300px;">
+		<input type="submit" class="btn btn-success">
+	</form>
+	<div class="index-cate-title">
+		搜索榜
+	</div>
+</div>
+{include file="../template/index/common/footer.html"}

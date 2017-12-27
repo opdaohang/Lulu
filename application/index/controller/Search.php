@@ -127,6 +127,46 @@ class Search extends Controller{
 		return view();
 
 	}
-	
+	public function views(){
+		// 获取系统变量
+		$setting	=	Model('Setting')->get(1)->toArray();
+
+		// 获取分页数量
+		$common_limit	=	$setting['common_limit_num'];
+		// 获取图片接口
+		$pic_api		=	$setting['common_pic_api'];
+		// 获取统计代码
+		$tongji_code	=	$setting['tongji_code'];
+		$webUrl			=	$setting['web_url'];
+		$newShowNum		=	$setting['index_new_num'];
+
+		// 赋值基本信息
+		$title		=	$setting['web_title'];
+
+		$webTitle 	=	"搜索-".$title;
+		$webDescription		=	'';
+		$webKeywords		=	'';
+
+		// 菜单
+		$menu	=	Model('Menu')
+    					->order('top asc')
+    					// ->cache('menu',$cacheTime)
+    					->select();
+
+    	// 获取搜索榜
+    	
+    	$this->assign('title',$title);
+    	$this->assign('webTitle',$webTitle);
+    	$this->assign('webKeywords',$webKeywords);
+    	$this->assign('webDescription',$webDescription);
+    	$this->assign('tongji_code',$tongji_code);
+    	$this->assign('webUrl',$webUrl);
+
+    	$this->assign('menu',$menu);
+		return view();
+	}
+	public function _empty(){
+		$this->redirect((url('index/index/errors')));
+	}
 }
 ?>
