@@ -1,16 +1,43 @@
 {include file="../template/index/common/header.html"}
 <div class="container">
 	<h3>SEO综合查询</h3>
-	<form action="" method="get" class="form-inline" style="text-align: center;">
-		<input type="text" name="url" class="form-control" style="width: 50%;" placeholder="务必输入http[s]://">
-		<input type="submit" value="查询" class="btn btn-success ">
+	<form action="" method="get" class="form-group" style="text-align: center;">
+		<input type="text" name="url" class="form-control"  placeholder="务必输入http[s]://"><br>
+		<input type="submit" value="-&nbsp;&nbsp;查询&nbsp;&nbsp;-" class="btn btn-success ">
 	</form>
 	<hr>
 	{if $message eq '1'}
 	<div class="col-md-12">
+		<div class="alert alert-danger">{$seoUrl}的综合查询信息</div>
 		<!-- 缩略图 -->
 		<div class="col-md-3">
 			<img src="https://blinky.nemui.org/shot/large?{$seoUrl}">
+		</div>
+		<div class="col-md-9">
+			<table class="table table-striped">
+				<tr>
+					<td>域名：</td>
+					<td>{$seoUrl}</td>
+				</tr>
+				<tr>
+					<td>权重：</td>
+					<td>百度：0</td>
+					<td>Google：0</td>
+					<td>搜狗：0</td>
+				</tr>
+				<tr>
+					<td>域名年龄：</td>
+					<td>----（创建于----）</td>
+				</tr>
+				<tr>
+					<td>ALEXA信息：</td>
+					<td>ALEXA全球排名：----  ALEXA数据预估流量：IP ≈----</td>
+				</tr>
+				<tr>
+					<td>网站测速</td>
+					<td>电信响应：----  联通响应：----</td>
+				</tr>
+			</table>
 		</div>
 	</div>
 	{else/}
