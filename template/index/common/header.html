@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1,mininum-scale=1,maxinum-scale=1">
+	<link rel="stylesheet" type="text/css" href="http://{$_SERVER['HTTP_HOST']}/static/index/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="http://{$_SERVER['HTTP_HOST']}/static/index/css/style.css">
+	<link rel="stylesheet" type="text/css" href="http://{$_SERVER['HTTP_HOST']}/static/index/css/index-media.css">
+	<title>{$webTitle}</title>
+	<meta name="keywords" content="{$webKeywords}">
+	<meta name="description" content="{$webDescription}">
+	<link rel="icon" href="http://{$_SERVER['HTTP_HOST']}/favicon.ico" type="image/x-icon" />
+    <link rel="shortcut icon" href="http://{$_SERVER['HTTP_HOST']}/favicon.ico" type="image/x-icon"/>
+</head>
+<body>
+	<!-- nav -->
+<div class="container-fluid common-nav">
+	<div class="container">
+		<div class="header common-logo">
+			<a href="{$webUrl}">{$title}</a>
+		</div>
+		<div class="common-nav-list">
+			<ul>
+				{volist name="menu" id="menu"}
+					<li><a href="{$menu.url}" target="_blank" rel="nofollow">{$menu.title}</a></li>
+				{/volist}
+			</ul>
+		</div>
+		<div class="common-nav-mobile">
+			<img src="http://{$_SERVER['HTTP_HOST']}/static/index/img/mobile-menu.png">
+		</div>
+	</div>
+</div>
+<!-- 悬浮搜索框 -->
+<div class="container searchs">
+	<form action="{:url('index/search/index')}" method="get" class="form-inline">
+		<input type="text" name="wd" class='form-control' placeholder="网站名称/网址" style="height: 80%;width: 80%;">
+		<input type="submit" value="搜索" class="btn btn-sm btn-success" style="width: 10%;">
+	</form>
+</div>

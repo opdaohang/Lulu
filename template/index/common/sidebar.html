@@ -1,0 +1,16 @@
+<div class="col-md-3 siteinfo-sidebar hidden-sm hidden-xs">
+			<div class="siteinfo-sidebar-title">
+				快速审核
+			</div>
+			<div class="siteinfo-sidebar-list">
+				<ul>
+					{volist name='su' id='su'}
+					<li class="list-group-item">
+						<a href="{:url('index/siteinfo/index',['id'=>$su.id])}" target="_blank" title="{$su.title}">
+							{$su.title}
+						</a>
+					</li>
+					{/volist}
+				</ul>
+			</div>
+</div>

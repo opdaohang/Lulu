@@ -1,0 +1,37 @@
+{include file="../template/index/common/header.html"}
+<div class="container">
+	<!-- 网站提交 -->
+	<div class="add-box">
+		<div class="add-box-title">
+			<h3>网站提交</h3>
+		</div>	
+		<div class="add-box-form">
+			<form action="{:url('index/addurl/adds')}" method="post">
+				<!-- 地区 -->
+				<div class="form-group">
+					<label>选择地区：</label>
+					<select name="cate" class="form-control">
+						{volist name="cate" id="cate"}
+							<option value="{$cate.id}">{$cate.title}</option>
+						{/volist}
+					</select>
+				</div>
+				<!-- 链接地址 -->
+				<div class="form-group">
+					<label>链接地址：</label>
+					<input type="text" name="url" class="form-control">
+				</div>
+				<!-- 验证码 -->
+				<div class="form-inline">
+					<label>验证码：</label>
+					<input type="text" name="yzm" class="form-control">
+					<img src="{:captcha_src()}" alt="captcha" onclick="this.src='{:captcha_src()}'" width="150" />
+				</div><br>
+				<div class="form-group">
+					<input type="submit" value="提交" class="btn btn-danger">
+				</div>
+			</form>
+		</div>
+	</div>
+</div>	
+{include file="../template/index/common/footer.html"}

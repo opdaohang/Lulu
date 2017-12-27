@@ -1,0 +1,34 @@
+{include file="../template/admin/common/header.html"}
+<div class="container">
+	<div class="cate-edit">
+		<h3>
+			[<span id="catename">{$message.title}</span>]-分类编辑
+			<button class="btn btn-danger" style="color: #fff;" onclick='window.history.go(-1)'>
+				<!-- <a href="> -->
+					取消编辑
+				<!-- </a> -->
+			</button>
+			<button class="btn ben-warning" id="fastCate">快速生成描述</button>
+		</h3>
+	</div>
+	<form action="{:url('admin/cate/editadmin')}" method="post">
+		<input type="hidden" name="id" value="{$message.id}">
+		<div class="form-group">
+			<label>分类名称</label>
+			<input type="text" name="title" class="form-control" value="{$message.title}">
+		</div>
+		<div class="form-group">
+			<label>分类关键词</label>
+			<input type="text" name="keywords" class="form-control" value="{$message.keywords}" id="keywords">
+		</div>
+		<div class="form-group">
+			<label>分类描述</label>
+			<textarea name="description" class="form-control" id="description">{$message.description}</textarea>
+		</div>
+		<div class="form-group">
+			<input type="submit" value="修改" class="btn btn-success">
+		</div>
+	</form>
+	
+</div>
+{include file="../template/admin/common/footer.html"}

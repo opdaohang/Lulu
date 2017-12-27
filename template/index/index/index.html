@@ -1,0 +1,66 @@
+{include file="../template/index/common/header.html"}
+<div class="container">
+	<!-- 收录情况 -->
+	<div class="alert alert-warning" style="word-break:break-all;">
+		<p>总收录网站{$allNums}个，待审网站{$daiNums}个。快审联系QQ：2280120391</p>
+	</div>
+	<!-- 开始展示网站 -->
+	<!-- 左边显示地区分类 -->
+	{include file="../template/index/common/indexsidebar.html"}
+	<!-- 右边显示网站 -->
+	<div class="col-md-9 index-web">
+		<!-- 名站推荐 -->
+		<div class="index-web-title">
+			名站推荐
+		</div>
+		<div class="index-web-mztj">
+			<ul>
+				{volist name="mztj" id="mztj"}
+					<li><a href="{$mztj.url}" target="_blank" rel="nofollow">{$mztj.title}</a></li>
+				{/volist}
+			</ul>
+		</div>
+		<!-- 快速审核 -->
+		<div class="index-web-title">
+			快速审核
+		</div>
+		<div class="index-web-mztj">
+			<ul>
+				{volist name="fast" id="fast"}
+					<li>
+						<a href="{:url('index/siteinfo/index',['id'=>$fast.id])}" target="_blank" title="{$fast.title}">
+						    {$fast.title}
+						</a>
+						</li>
+				{/volist}
+			</ul>
+		</div>
+		<!-- 随机推荐 -->
+		<div class="index-web-title">
+			随机推荐
+		</div>
+		<div class="index-web-mztj">
+				{volist name="suiji" id="suiji"}
+					<li>
+					    <a href="{:url('index/siteinfo/index',['id'=>$suiji.id])}" title="{$suiji.title}" target="_blank">
+					        {$suiji.title}
+					   </a>
+					</li>
+				{/volist}
+		</div>
+	</div>
+</div>
+<div class="container">
+	<!-- 友情链接 -->
+	<div class="index-links">
+		<div class="index-links-title">
+			友情链接
+		</div>
+		<div class="index-links-list">
+			{volist name="links" id="links"}
+				<li><a href="{$links.url}" target="_blank">{$links.title}</a></li>
+			{/volist}
+		</div>
+	</div>
+</div>
+{include file="../template/index/common/footer.html"}

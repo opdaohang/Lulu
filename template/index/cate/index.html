@@ -1,0 +1,44 @@
+{include file="../template/index/common/header.html"}
+<!-- 主体部分 -->
+<div class="container">
+	<div class="cate-info">
+		
+		{include file="../template/index/common/indexsidebar.html"}
+		<!-- 列表list -->
+		<div class="col-md-9 cate-info-content">
+			<div class="index-cate-title">
+				分类：{$cateArr.title}&nbsp;(共{$allUrlNum}个网站)
+			</div>
+			<div class="cate-info-content-list">
+				{volist name="url" id="url"}
+				<div class="col-md-2 hidden-xs hidden-sm">
+					<img src="{$pic_api}{$url.url}" width="100%" alt="{$url.title}">
+				</div>
+				<div class="col-md-10">
+					<ul>
+						<li>
+							<span style="font-weight: bold;">
+								<a href="{:url('index/siteinfo/index',['id'=>$url.id])}" title="{$url.title}">
+									{$url.title}
+								</a>
+							</span>
+						</li>
+						<li>域名：
+							<a href="{$url.url}" target="_blank" rel="nofollow" title="{$url.title}">
+								{$url.url}
+							</a>
+							<img src="http://{$_SERVER['HTTP_HOST']}/static/index/img/link_share.png" width="15" height="15">
+						</li>
+						<li>查看次数：{$url.view}</li>
+					</ul>
+				</div>
+				<div style="clear: both;"></div>
+				{/volist}
+				<!-- 分页 -->
+				{$page->render()}
+			</div>
+		</div>
+	</div>
+</div>
+
+{include file="../template/index/common/footer.html"}

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="robots" content="noindex">
+	<meta name="viewport" content="width=device-width,initial-scale=1,mininum-scale=1,maxinum-scale=1">
+	<link rel="stylesheet" type="text/css" href="http://www.ioululu.com/static/admin/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="http://www.ioululu.com/static/admin/css/admin.css">
+	<link rel="stylesheet" type="text/css" href="http://www.ioululu.com/static/admin/css/admin-media.css">
+	<script src="http://www.ioululu.com/static/admin/js/jquery-3.2.1.min.js"></script>
+	<title>登录</title>
+</head>
+<body>
+
+<div class="container">
+	<div class="login-title" style="text-align: center;">
+		<h3>后台登录</h3>
+	</div>
+	<div class="login-content" style="text-align: center;">
+		<form action="{:url('admin/login/loginyz')}" method="post">
+			<div class="form-inline">
+				<label>用户名：</label>
+				<input type="text" name="username" class="form-control"><br><br>
+				<label>&nbsp;&nbsp;&nbsp;&nbsp;密码：</label>
+				<input type="password" name="userpass" class="form-control"><br><br>
+				<label>验证码：</label>
+				<input type="text" name="yzm" class="form-control"><br><br>
+				<img src="{:captcha_src()}" onclick="this.src='{:captcha_src()}'" width="150"><br><br>
+				<input type="submit" value="登录" class="btn btn-danger">
+			</div>
+		</form>
+	</div>
+</div>
+
+{include file="../template/admin/common/footer.html"}

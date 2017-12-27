@@ -1,0 +1,60 @@
+{include file="../template/index/common/header.html"}
+<div class="container">
+	<div class="index-search" style="margin-top:10px;">
+		{include file="../template/index/common/indexsidebar.html"}
+		<div class="col-md-9 index-web">
+			<div class="index-cate-title">
+				搜索词：{$wd}&nbsp;- 大约{$searchNum}个结果
+			</div>
+			<div class="cate-info-content-list">
+				{volist name="searchList" id="searchList"}
+				<div class="col-md-2 hidden-xs hidden-sm">
+					{if $searchList.status eq 1}
+					<img src="{$pic_api}{$searchList.url}" width="100%" alt="{$searchList.title}">
+					{else/}
+					<img src="http://{$_SERVER['HTTP_HOST']}/static/index/img/search-no-audit.png" width="100%" alt="{$searchList.title}">
+					{/if}
+				</div>
+				<div class="col-md-10">
+					<ul>
+						<li>
+							<span style="font-weight: bold;">
+								{if $searchList.status eq 1}
+								<a href="{:url('index/siteinfo/index',['id'=>$searchList.id])}" title="{$searchList.title}">
+									{$searchList.title}
+								</a>
+								{else/}
+									<del>{$searchList.title}</del>
+								{/if}
+							</span>
+						</li>
+						<li>
+							{if $searchList.status eq 1}
+							域名：
+							<a href="{$searchList.url}" target="_blank" rel="nofollow" title="{$searchList.title}">
+								{$searchList.url}
+							</a>
+							<img src="http://{$_SERVER['HTTP_HOST']}/static/index/img/link_share.png" width="15" height="15">
+							{else/}
+								<del>域名：{$searchList.url}</del>
+							{/if}
+						</li>
+						<li>
+						{if $searchList.status eq 1}
+						查看次数：{$searchList.view}
+						{else/}
+						查看次数：0
+						{/if}
+						</li>
+					</ul>
+				</div>
+				<div style="clear: both;"></div>
+				{/volist}
+				<!-- 分页 -->
+				{$searchPage->render()}
+			</div>
+		</div>
+	</div>
+
+</div>
+{include file="../template/index/common/footer.html"}

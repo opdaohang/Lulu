@@ -1,0 +1,27 @@
+<div class="col-md-3 index-cate">
+		<div class="index-cate-title">
+			地区分类
+		</div>
+		<div class="index-cate-list">
+			<ul>
+				{volist name='cate' id='cate'}
+					<li><a href="{:url('index/cate/index',['id'=>$cate.id])}">{$cate.title}</a></li>
+				{/volist}
+			</ul>
+		</div>
+		<!-- 最新加入 -->
+		<div class="index-cate-title">
+			最新加入
+		</div>
+		<div class="index-cate-list">
+			<ul>
+				{volist name="new" id="new"}
+					<li class="list-group-item" style="margin-top:5px;">
+						<a href="{:url('index/siteinfo/index',['id'=>$new.id])}" title="{$new.title}" target="_blank">
+							{$new.title}
+						</a>
+					</li>
+				{/volist}
+			</ul>
+		</div>
+	</div>

@@ -1,0 +1,87 @@
+{include file="../template/admin/common/header.html"}
+<div class="container">
+	<h3>系统设置</h3>
+	<div class="admin-setting">
+		<form action="{:url('admin/setting/edit')}" method="post">
+			<div class="form-group">
+				<label>网站标题</label>
+				<input type="text" name="web_title" class="form-control" value="{$setting.web_title}">
+			</div>
+			<div class="form-group">
+				<label>网站关键词</label>
+				<input type="text" name="web_keywords" class="form-control" value="{$setting.web_keywords}">
+			</div>
+			<div class="form-group">
+				<label>网站描述</label>
+				<textarea name="web_description" class="form-control">{$setting.web_description}</textarea>
+			</div>
+			<div class="form-group">
+				<label>网站链接</label>
+				<input type="text" name="web_url" class="form-control" value="{$setting.web_url}">
+			</div>
+			<div class="form-group">
+				<label>全站列表每页显示数量(包括后台)</label>
+				<input type="text" name="common_limit_num" value="{$setting.common_limit_num}" class="form-control">
+			</div>
+			<div class="form-group">
+				<label>展示图片api接口</label>
+				<input type="text" name="common_pic_api" value="{$setting.common_pic_api}" class="form-control">
+			</div>
+			<hr>
+			<div class="form-group">
+				<label>首页名站推荐显示数量</label>
+				<input type="text" name="index_mztj_num" class="form-control" value="{$setting.index_mztj_num}">
+			</div>
+			<div class="form-group">
+				<label>首页随机网址数量</label>
+				<input type="text" name="index_suiji_num" class="form-control" value="{$setting.index_suiji_num}">
+			</div>
+			<div class="form-group">
+				<label>首页侧边栏最新加入数量</label>
+				<input type="text" name="index_new_num" class="form-control" value="{$setting.index_new_num}">
+			</div>
+			<!-- siteinfo -->
+			<hr>
+			<div class="form-group">
+				<label>网址界面(siteinfo)侧边栏快速审核显示类型</label>
+				<select name="siteinfo_fast_type" class="form-control">
+					<option value="{$setting.siteinfo_fast_type}">
+						{if $setting.siteinfo_fast_type eq 'new'}
+						显示最新
+						{elseif $setting.siteinfo_fast_type eq 'hot'}
+						点击量最高
+						{else / }
+						随机显示
+						{/if}
+					</option>
+					<option value="new">显示最新</option>
+					<option value="suiji">随机显示</option>
+					<option value="hot">按照点击量显示</option>
+				</select>
+			</div>
+			<div class="form-group">
+				<label>网址界面(siteinfo)侧边栏快速审核显示数量</label>
+				<input type="text" name="siteinfo_fast_num" value="{$setting.siteinfo_fast_num}" class="form-control">
+			</div>
+			<div  class="form-group">
+				<label>网址界面(siteinfo)猜你喜欢显示数量</label>
+				<input type="text" name="siteinfo_like_num" value="{$setting.siteinfo_like_num}" class="form-control">
+			</div>
+			<div class="form-group">
+				<label>全站缓存时间</label>
+				<input type="text" name="cache_time" class="form-control" value="{$setting.cache_time}" readonly>
+			</div>
+			<div class="form-group">
+				<label>统计代码</label>
+				<textarea name="tongji_code" class="form-control" style="min-height: 150px;text-align: left;">
+					{$setting.tongji_code}
+				</textarea>
+			</div>
+
+			<div class="form-group">
+				<input type="submit" value="提交" class="btn btn-success">
+			</div>
+		</form>
+	</div>
+</div>
+{include file="../template/admin/common/footer.html"}

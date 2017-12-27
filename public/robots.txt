@@ -1,0 +1,6 @@
+User-agent: *
+Disallow: 
+Disallow: /admin
+Disallow: /admin/login
+Disallow: /admin/login/index
+Sitemap: http://www.ioululu.com/sitemap.xml

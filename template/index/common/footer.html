@@ -1,0 +1,31 @@
+<!-- footer -->
+<div class="container">
+	<div class="common-footer">
+		{$title}©2017-<a href="{:url('index/addurl/index')}">网址提交</a>{$tongji_code}
+	</div>
+</div>
+<script src="http://{$_SERVER['HTTP_HOST']}/static/index/js/jquery-3.2.1.min.js"></script>
+<script src="http://{$_SERVER['HTTP_HOST']}//static/index/js/index.js"></script>
+<!-- 360链接提交 -->
+<script>(function(){
+var src = (document.location.protocol == "http:") ? "http://js.passport.qihucdn.com/11.0.1.js?dc67f04dfaee2f1fd0e6cce566029385":"https://jspassport.ssl.qhimg.com/11.0.1.js?dc67f04dfaee2f1fd0e6cce566029385";
+document.write('<script src="' + src + '" id="sozz"><\/script>');
+})();
+</script>
+<!-- 百度链接提交 -->
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+</body>
+</html>

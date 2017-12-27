@@ -1,0 +1,41 @@
+{include file="../template/admin/common/header.html"}
+
+<div class="container">
+	<div class="admin-cate">
+		<div class="admin-cate-insert" style="text-align: center;">
+			<form action="{:url('admin/cate/cateinsert')}" method="post">
+				<div class="form-inline">
+					<!-- <label>添加分类</label><br> -->
+					<label>分类名称：</label>
+					<input type="text" name="title" class="form-control" id="cateinsertval">
+					<input type="submit" value="添加" class="btn btn-success" id="cateinsert">
+				</div>
+			</form>
+		</div>
+		<br>
+		<ul class="list-group">
+			<li class="list-group-item active">所有分类(每页显示10个)</li>
+			{volist name="cateList" id="clist"}
+				<li class="list-group-item">
+					<a href="{:url('index/cate/index',['id'=>$clist.id])}" target="_blank">
+						{$clist.title}
+					</a>
+					<span class="btn btn-sm btn-success del-btn" style="float: right;color: #fff;margin-left:10px;">
+						<a href="{:url('admin/cate/catedel',['id'=>$clist.id])}">
+							删除
+						</a>
+					</span>
+					<span class="btn btn-sm btn-success del-btn" style="float: right;color: #fff;">
+						<a href="{:url('admin/cate/cateedit',['id'=>$clist.id])}">
+							编辑
+						</a>
+					</span>
+				</li>
+			{/volist}
+		{$pageination->render()}
+		</ul>
+		<!-- 分页 -->
+			
+	</div>
+</div>
+{include file="../template/admin/common/footer.html"}

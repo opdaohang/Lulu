@@ -1,0 +1,65 @@
+{include file="../template/index/common/header.html"}
+
+<div class="container">
+	<!-- 广告 -->
+	<!-- <div class="siteinfo-ads">
+		<img src="http://{$_SERVER['HTTP_HOST']}/static/index/ad/siteinfo-top-ad.jpg" width="100%">
+	</div> -->
+	<!-- 展示网站信息 -->
+	<div class="siteinfo">
+		<div class="col-md-9 siteinfo-info">
+			<!-- info -->
+			<div class="siteinfo-info-title">
+				<b>{$urlArr.title}</b>&nbsp;-&nbsp;<small>[{$urlArr.url}]</small>
+			</div>
+			<div class="siteinfo-info-content">
+				<div class="col-md-4 siteinfo-info-content-pic hidden-xs hidden-sm">
+					<img src="{$pic_api}{$urlArr.url}" width="100%" alt="{$urlArr.title}">
+				</div>
+				<div class="col-md-8 siteinfo-info-content-info">
+					<ul>
+						<li>网站标题：<b><a href="{$urlArr.url}" target="_blank" title="{$urlArr.title}" rel="nofollow">{$urlArr.title}</a></b></li>
+						<li>网站地址：
+							<a href="{$urlArr.url}" target="_blank" rel="nofollow" title="{$urlArr.url}">
+								{$urlArr.url}
+							</a>
+							<img src="http://www.ioululu.com/static/index/img/link_share.png" width="15" height="15">
+
+						</li>
+						<li>分类目录：
+							<a href="{$webUrl}" target="_blank" title="{$title}">
+								{$title}
+							</a>
+							>
+							<a href="{:url('index/cate/index',['id'=>$cate.id])}" target="_blank" title="{$cate.title}">
+								{$cate.title}
+							</a>
+						</li>
+						<li>网站描述：{$urlArr.description}</li>
+						<li>浏览次数：{$urlArr.view}</li>
+						<li role="separator" class="divider"></li>
+						<li><span class="btn btn-sm btn-success" onclick="window.open('{$urlArr.url}');">打开网站</span></li>
+					</ul>
+				</div>
+			</div>
+			<div style="clear: both;"></div>
+			<!-- 推荐 -->
+			<div class="siteinfo-info-title">
+				猜你喜欢
+			</div>
+			<div class="siteinfo-cai-list">
+				<ul>
+					{volist name='cai' id='cai'}
+						<li>
+							<a href="{:url('index/siteinfo/index',['id'=>$cai.id])}" target="_blank" title="{$cai.title}">
+								{$cai.title}
+							</a>
+					</li>
+					{/volist}
+				</ul>
+			</div>
+		</div>
+		{include file="../template/index/common/sidebar.html"}
+	</div>
+</div>
+{include file="../template/index/common/footer.html"}
