@@ -17,9 +17,9 @@ return [
     // 数据库名
     'database'        => 'repingcc_lulu',
     // 用户名
-    'username'        => 'repingcc',
+    'username'        => 'root',
     // 密码
-    'password'        => 'w1954328',
+    'password'        => 'root',
     // 端口
     'hostport'        => '',
     // 连接dsn
