@@ -1,0 +1,20 @@
+{include file="../template/index/common/header.html"}
+<div class="container">
+	<h3>SEO综合查询</h3>
+	<form action="" method="get" class="form-inline" style="text-align: center;">
+		<input type="text" name="url" class="form-control" style="width: 50%;" placeholder="务必输入http[s]://">
+		<input type="submit" value="查询" class="btn btn-success ">
+	</form>
+	<hr>
+	{if $message eq '1'}
+	<div class="col-md-12">
+		<!-- 缩略图 -->
+		<div class="col-md-3">
+			<img src="https://blinky.nemui.org/shot/large?{$seoUrl}">
+		</div>
+	</div>
+	{else/}
+		<span style="text-align: center;">查询失败</span>
+	{/if}
+</div>
+{include file="../template/index/common/footer.html"}
