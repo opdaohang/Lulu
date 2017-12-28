@@ -48,8 +48,8 @@ Route::any('/sitemap_siteinfo','index/sitemap/siteinfo','[]',['ext'=>'xml','deny
 
 
 // search
-Route::get('/search','index/search/index');
-
+Route::get('/searchs','index/search/index');
+Route::rule('/search','index/search/views');
 
 // 批量注册get
 Route::rule([
