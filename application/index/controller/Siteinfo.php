@@ -16,7 +16,7 @@ class Siteinfo extends Controller{
 		}
 
 		// 根据id获取信息
-		$urlArr = Model('Url')->get($id)->toArray();
+		$urlArr = Model('Url')->get($id);
 		if(!$urlArr){
 			$this->redirect(url('index/index/errors'));
 		}else {
