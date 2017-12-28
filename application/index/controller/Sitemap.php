@@ -18,6 +18,7 @@ class Sitemap extends Controller{
         
         return view();
     }
+    // 分类链接大全
     public function lists(){
         header('content-type:text/xml');
         // 获取所有分类
@@ -27,6 +28,7 @@ class Sitemap extends Controller{
         
         return view();
     }
+    // 网址链接大全
     public function siteinfo(){
         header('content-type:text/xml');
         // 获取所有url地址
