@@ -16,11 +16,15 @@ class Siteinfo extends Controller{
 		}
 
 		// 根据id获取信息
-		$urlArr = Model('Url')->get($id);
+		$urlArr = Model('Url')->get($id)->toArray();
 		if(!$urlArr){
 			$this->redirect(url('index/index/errors'));
 		}else {
 			$urlArr = $urlArr->toArray();
+            // 判断状态
+            if($urlArr['status'] != 1){
+                $this->redirect(url('index/index/errors'));
+            }
 		}
 
 		// 获取基本信息
