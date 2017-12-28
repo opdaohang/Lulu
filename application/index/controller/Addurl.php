@@ -28,7 +28,6 @@ class Addurl extends Controller{
     	// 获取所有的分类
     	$cate 	= 	Model('Cate')
     					->order('id asc')
-    					->cache('cate',$cacheTime)
     					->select();
 
 
