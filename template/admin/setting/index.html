@@ -20,8 +20,12 @@
 				<input type="text" name="web_url" class="form-control" value="{$setting.web_url}">
 			</div>
 			<div class="form-group">
-				<label>全站列表每页显示数量(包括后台)</label>
+				<label>全站列表每页显示数量(不包括后台)</label>
 				<input type="text" name="common_limit_num" value="{$setting.common_limit_num}" class="form-control">
+			</div>
+			<div class="form-group">
+				<label>后台列表每页显示数量</label>
+				<input type="text" name="admin_limit_num" value="{$setting.admin_limit_num}" class="form-control">
 			</div>
 			<div class="form-group">
 				<label>展示图片api接口</label>
@@ -67,6 +71,34 @@
 				<label>网址界面(siteinfo)猜你喜欢显示数量</label>
 				<input type="text" name="siteinfo_like_num" value="{$setting.siteinfo_like_num}" class="form-control">
 			</div>
+			<hr>
+			<div class="form-group">
+				<label>搜索界面显示搜索词的类型</label>
+				<select name="search_show_type" class="form-control">
+					<option value="{$setting.search_show_type}">
+						{if $setting.search_show_type eq 'new'}
+							显示最新
+						{elseif $setting.search_show_type eq 'hot'}
+							显示最热
+						{else/}
+							随机显示
+						{/if}
+					</option>
+					<option value="new">显示最新</option>
+					<option value="hot">显示最热</option>
+					<option value="suiji">随机显示</option>
+				</select>
+			</div>
+			<div class="form-group">
+				<label>搜索界面显示搜索词的数量</label>
+				<input type="text" name="search_show_num" value="{$setting.search_show_num}" class="form-control">
+			</div>
+			<hr>
+			<div class="form-group">
+				<label>SEO查询界面显示的搜索数量</label>
+				<input type="text" name="seo_show_num" value="{$setting.seo_show_num}" class="form-control">
+			</div>
+			<hr>
 			<div class="form-group">
 				<label>全站缓存时间</label>
 				<input type="text" name="cache_time" class="form-control" value="{$setting.cache_time}" readonly>

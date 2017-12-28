@@ -1,10 +1,9 @@
 {include file="../template/admin/common/header.html"}
 <div class="container">
-	
-	<div class="admin-mztj">
+<div class="admin-mztj">
 		<ul class="list-group">
 			<li class="list-group-item active">
-			<a href="{:url('admin/all/nogo')}" class="del-btn">->查看未审核网址</a>
+			<a href="{:url('admin/all/index')}" class="del-btn">->查看所有网址</a>
 			<span class="btn btn-sm btn-warning del-btn" style="float: right;">
 				<a href="#insert">
 					添加
@@ -62,50 +61,5 @@
 		</ul>
 	       
 	</div>
-	
-	<!--  -->
-	<div class="admin-all-insert">
-		<h4>添加</h4><a name="insert"></a>
-		<form action="{:url('admin/all/allinsert')}" method="post">
-			<div class="form-group">
-				<label>分类</label>
-				<select name='cate' class="form-control">
-					{volist name="cate" id="cate"}
-					<option value="{$cate.id}">{$cate.title}</option>
-					{/volist}
-				</select>
-			</div>
-			<div class="form-group">
-				<label>快速审核</label>
-				<select name="fast" class="form-control">
-					<option value="0">否</option>
-					<option value="1">是</option>
-				</select>
-			</div>
-			<div class="form-group">
-				<label>网站标题</label>
-				<input type="text" name="title" class="form-control" id="title">
-			</div>
-			<div class="form-group">
-				<label>
-					网站URL&nbsp;&nbsp;
-					<span class="btn btn-sm btn-warning" id="insertjbxx">获取信息</span>
-				</label>
-				<input type="text" name="url" class="form-control" id="wurl">
-			</div>
-			<div class="form-group">
-				<label>关键词</label>
-				<input type="text" name="keywords" class="form-control" id="keywords">
-			</div>
-			<div class="form-group">
-				<label>描述</label>
-				<textarea name="description" class="form-control" id="description"></textarea>
-			</div>
-			<div class="form-group">
-				<input type="submit" type="submit" class="btn btn-success" value="添加">
-			</div>
-		</form>
-	</div>
 </div>
-
 {include file="../template/admin/common/footer.html"}

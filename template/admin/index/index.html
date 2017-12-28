@@ -4,8 +4,33 @@
 		站点统计
 	</div>
 	<div class="admin-index-content">
-		已经审核<span style="font-weight: bold;color: #ff0000;font-size:18px;">{$already}</span>个站点&nbsp;&nbsp;
-		<span style="font-weight: bold;color: #ff0000;font-size:18px;">{$wait}</span>个待审站点
+		<ul class="list-group">
+			<li class="list-group-item">
+				名站个数：<a href="{:url('admin/mz/index')}">{$mz}</a>
+			</li>
+			<li class="list-group-item">
+				已审站点：<a href="{:url('admin/all/index')}">{$already}</a>
+			</li>
+			<li class="list-group-item">
+				待审站点：<a href="{:url('admin/all/nogo')}">{$wait}</a>
+			</li>
+			<li class="list-group-item">
+				分类个数：<a href="{:url('admin/cate/index')}">{$cate}</a>
+			</li>
+			<li class="list-group-item">
+				菜单个数：<a href="{:url('admin/menu/index')}">{$menu}</a>
+			</li>
+			<li class="list-group-item">
+				搜索词数量：<a href="{:url('admin/searchgl/index')}">{$search}</a>
+			</li>
+			<li class="list-group-item">
+				SEO查询数量：<a href="{:url('admin/seogl/index')}">{$seo}</a>
+			</li>
+		</ul>
+		
+		<br>
+		
+
 	</div>
 </div>
 {include file="../template/admin/common/footer.html"}

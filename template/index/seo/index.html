@@ -1,17 +1,17 @@
 {include file="../template/index/common/header.html"}
 <div class="container">
-	<h3>SEO综合查询</h3>
+	<h3 style="text-align: center;"><a href="{:url('index/seo/index')}">SEO综合查询</a></h3>
 	<form action="" method="get" class="form-group" style="text-align: center;">
-		<input type="text" name="url" class="form-control"  placeholder="务必输入http[s]://"><br>
+		<input type="text" name="url" class="form-control"  placeholder="请规范输入网址" style="width: 80%;margin-left:10%;"><br>
 		<input type="submit" value="-&nbsp;&nbsp;查询&nbsp;&nbsp;-" class="btn btn-success ">
 	</form>
 	<hr>
 	{if $message eq '1'}
 	<div class="col-md-12">
-		<div class="alert alert-danger">{$seoUrl}的综合查询信息</div>
+		<div class="alert alert-danger">{$seoUrl}的SEO综合查询信息</div>
 		<!-- 缩略图 -->
 		<div class="col-md-3">
-			<img src="https://blinky.nemui.org/shot/large?{$seoUrl}">
+			<img src="https://blinky.nemui.org/shot/large?http://{$seoUrl}">
 		</div>
 		<div class="col-md-9">
 			<table class="table table-striped">
@@ -21,27 +21,105 @@
 				</tr>
 				<tr>
 					<td>权重：</td>
-					<td>百度：0</td>
-					<td>Google：0</td>
-					<td>搜狗：0</td>
+					<td>暂未开放</td>
 				</tr>
 				<tr>
 					<td>域名年龄：</td>
-					<td>----（创建于----）</td>
+					<td>
+					<img src="http://{$_SERVER['HTTP_HOST']}/static/index/img/zhuan.gif">
+					（创建于<img src="http://{$_SERVER['HTTP_HOST']}/static/index/img/zhuan.gif">）</td>
 				</tr>
 				<tr>
 					<td>ALEXA信息：</td>
-					<td>ALEXA全球排名：----  ALEXA数据预估流量：IP ≈----</td>
+					<td>
+					ALEXA全球排名：<img src="http://{$_SERVER['HTTP_HOST']}/static/index/img/zhuan.gif"> 
+				    ALEXA数据预估流量：IP ≈<img src="http://{$_SERVER['HTTP_HOST']}/static/index/img/zhuan.gif">
+					</td>
 				</tr>
 				<tr>
 					<td>网站测速</td>
-					<td>电信响应：----  联通响应：----</td>
+					<td>
+						电信响应：<img src="http://{$_SERVER['HTTP_HOST']}/static/index/img/zhuan.gif">  联通响应：<img src="http://{$_SERVER['HTTP_HOST']}/static/index/img/zhuan.gif">
+					</td>
+				</tr>
+			</table>
+		</div>
+	
+	</div>
+	<div class="col-md-12">
+		<div class="index-cate-title">
+			{$seoUrl}的收录量
+		</div>
+		<table class="table">
+			<tr>
+				<th>/</th>
+				<th>百度</th>
+				<th>搜狗</th>
+				<th>google</th>
+				<th>360</th>
+				<th>bing</th>
+			</tr>
+			<tr>
+				<td>收录量</td>
+				<td id="baiduIncluded">
+					<img src="http://{$_SERVER['HTTP_HOST']}/static/index/img/zhuan.gif">
+				</td>
+				<td id="sogouIncluded">
+					<img src="http://{$_SERVER['HTTP_HOST']}/static/index/img/zhuan.gif">
+				</td>
+				<td id="googleIncluded">
+					<img src="http://{$_SERVER['HTTP_HOST']}/static/index/img/zhuan.gif">
+				</td>
+				<td id="360Included">
+					<img src="http://{$_SERVER['HTTP_HOST']}/static/index/img/zhuan.gif">
+				</td>
+				<td id="bingIncluded">
+					<img src="http://{$_SERVER['HTTP_HOST']}/static/index/img/zhuan.gif">
+				</td>
+			</tr>
+		</table>
+	</div>
+	<div class="col-md-12">
+		<div class="index-cate-title">
+			{$seoUrl}的whios信息
+		</div>
+		<div class="seo-whois">
+			<img src="http://{$_SERVER['HTTP_HOST']}/static/index/img/zhuan.gif">
+		</div>
+	</div>
+	<div class="col-md-12">
+		<div class="index-cate-title">
+			{$seoUrl}的Alexa走势图
+		</div>
+		<div class="seo-alexa">
+			<table class="table">
+				<tr>
+					<th style="text-align: center;">排名走势图</th>
+					<th style="text-align: center;">搜索流量占比</th>
+				</tr>
+				<tr>
+					<td  style="text-align: center;">
+						<img src="http://traffic.alexa.com/graph?y=t&b=ffffff&n=666&f=999999&r=7d&t=2&z=30&c=1&h=280&w=920&u={$seoUrl}">
+					</td>
+					<td style="text-align: center;">
+						<img src="http://traffic.alexa.com/graph?o=lt&y=q&b=ffffff&n=666666&f=999999&p=4e8cff&r=1y&t=2&z=0&c=1&h=150&w=340&u={$seoUrl}">
+					</td>
 				</tr>
 			</table>
 		</div>
 	</div>
 	{else/}
-		<span style="text-align: center;">查询失败</span>
+		<div class="col-md-12">
+			<h4 style="text-align: center;color: #04859d;">最近查询网址</h4>
+			<div class="index-web-mztj">
+				<ul>
+				{volist name="seoArr" id="seoArr"}
+				<li><a href="{:url('index/seo/index')}?url={$seoArr.url}">{$seoArr.url}</a></li>
+				{/volist}
+				</ul>
+			</div>
+		</div>
+
 	{/if}
 </div>
 {include file="../template/index/common/footer.html"}

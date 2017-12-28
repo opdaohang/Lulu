@@ -1,0 +1,20 @@
+{include file="../template/admin/common/header.html"}
+<div class="container">
+	<ul class="list-group">
+		<li class="list-group-item active">
+			搜索词管理(共{$allNum}个)
+		</li>
+		{volist name='searchArr' id='searchArr'}
+			<li class="list-group-item">
+				{$searchArr.wd}-<small>[{$searchArr.num}]</small>
+				<span class="btn btn-sm btn-danger del-btn" style="float: right;">
+					<a href="{:url('admin/searchgl/del',['id'=>$searchArr.id])}">
+						删除
+					</a>
+				</span>
+			</li>
+		{/volist}
+		{$pageination->render()}
+	</ul>
+</div>
+{include file="../template/admin/common/footer.html"}

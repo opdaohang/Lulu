@@ -6,7 +6,14 @@
 		<input type="submit" class="btn btn-success">
 	</form>
 	<div class="index-cate-title">
-		搜索榜
+		搜索历史
+	</div>
+	<div class="index-web-mztj">
+		<ul>
+		{volist name='searchShowArr' id="searchShowArr"}
+			<li><a href="{:url('index/search/index')}?wd={$searchShowArr.wd}">{$searchShowArr.wd}</a></li>
+		{/volist}
+		</ul>
 	</div>
 </div>
 {include file="../template/index/common/footer.html"}
