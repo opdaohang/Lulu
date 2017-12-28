@@ -51,6 +51,10 @@ Route::any('/sitemap_siteinfo','index/sitemap/siteinfo','[]',['ext'=>'xml','deny
 Route::get('/searchs','index/search/index');
 Route::rule('/search','index/search/views');
 
+// seo
+Route::any('/seo','index/seo/index'); 
+
+
 // 批量注册get
 Route::rule([
 	// url路由
