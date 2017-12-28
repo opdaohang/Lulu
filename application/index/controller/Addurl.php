@@ -23,7 +23,6 @@ class Addurl extends Controller{
     	// 获取菜单
     	$menu	=	Model('Menu')
     					->order('top asc')
-    					->cache('menu',$cacheTime)
     					->select();
 
     	// 获取所有的分类
