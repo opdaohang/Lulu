@@ -1,9 +1,9 @@
 {include file="../template/index/common/header.html"}
 <div class="container">
-	<h3>综合搜索</h3>
-	<form action="{:url('index/search/index')}" method="get" class="form-inline" style="text-align: center;">
-		<input type="text" name="wd" class="form-control" placeholder="" style="min-width: 300px;">
-		<input type="submit" class="btn btn-success">
+	<h3 style="text-align: center;"><a href="{:url('index/search/views')}">综合搜索</a></h3>
+	<form action="{:url('index/search/index')}" method="get" class="form-group" style="text-align: center;">
+		<input type="text" name="wd" class="form-control" placeholder="" style="width: 80%;margin-left:10%;"><br>
+		<input type="submit" class="btn btn-success" value="-&nbsp;&nbsp;搜索&nbsp;&nbsp;-">
 	</form>
 	<div class="index-cate-title">
 		搜索历史
