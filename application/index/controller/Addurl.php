@@ -95,9 +95,11 @@ class Addurl extends Controller{
 		}
 	
 		// 准备插入数据
+		$time    =		@date('Y-m-d H:i:s');
 		$insertData		=	[
 			'url'=>$data['url'],
 			'cate'=>$data['cate'],
+			'time'=>$time,
 		];
 		// 如果都匹配
 		$insert	=	Model('Url')->insert($insertData);
@@ -107,8 +109,6 @@ class Addurl extends Controller{
 			$this->success('提交成功，请等待审核',url('index/addurl/index'));
 		}
 
-		// 请求数据更新网站信息
-		// action('updates',['url'=>$data['url']]);
 	}
 	// 更新网站数据
 	public function updates($url){

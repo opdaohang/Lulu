@@ -23,7 +23,7 @@ class Mz extends Controller{
 		$setting 	=	Model('Setting')->get(1)->toArray();
 
 		// 获取limit
-		$common_limit	=	$setting['common_limit_num'];
+		$common_limit	=	$setting['admin_limit_num'];
 
 		// 获取根据分页所有站点
 		$all = Model('Mztj')->order('id desc')->limit($common_limit)->page($page)->select();

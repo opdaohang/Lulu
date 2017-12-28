@@ -153,8 +153,41 @@ class Search extends Controller{
     					// ->cache('menu',$cacheTime)
     					->select();
 
-    	// 获取搜索榜
+    	// 获取搜索系统配置
+    	$searchShowType		=	$setting['search_show_type'];
+    	$searchShowNum		=	$setting['search_show_num'];
+
+    	// 根据展示类型来查找
+    	switch ($searchShowType) {
+    		// 最新
+    		case 'new':
+    			$searchShowArr	=	Model('Search')
+    									->order('id desc')
+    									->limit($searchShowNum)
+    									->select();
+    		break;
+    		// 最热
+    		case 'hot':
+    			$searchShowArr	=	Model('Search')
+    									->order('num desc')
+    									->limit($searchShowNum)
+    									->select();
+    		// 随机
+    		case 'suiji':
+    			$searchShowArr	=	Model('Search')
+    									->order('rand()')
+    									->limit($searchShowNum)
+    									->select();
+    		// 默认随机
+    		default:
+    			$searchShowArr	=	Model('Search')
+    									->order('rand()')
+    									->limit($searchShowNum)
+    									->select();
+    		break;
+    	}
     	
+
     	$this->assign('title',$title);
     	$this->assign('webTitle',$webTitle);
     	$this->assign('webKeywords',$webKeywords);
@@ -163,6 +196,7 @@ class Search extends Controller{
     	$this->assign('webUrl',$webUrl);
 
     	$this->assign('menu',$menu);
+    	$this->assign('searchShowArr',$searchShowArr);
 		return view();
 	}
 	public function _empty(){

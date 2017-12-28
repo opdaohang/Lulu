@@ -18,9 +18,29 @@ class Index extends Controller{
 		// 获取待审核站点数量
 		$wait		=	Model('Url')->where('status',0)->count();
 
+		// 获取分类个数
+		$cate		=	Model('Cate')->count();
+
+		// 获取名站个数
+		$mz			=	Model('Mztj')->count();
+
+		// 菜单个数
+		$menu		=	Model('Menu')->count();
+
+		// 搜索词个数
+		$search		=	Model('Search')->count();
+
+		// seo查询词个数
+		$seo 		=	Model('Seo')->count();
+
 		// 赋值
 		$this->assign('already',$already);
 		$this->assign('wait',$wait);
+		$this->assign('cate',$cate);
+		$this->assign('mz',$mz);
+		$this->assign('menu',$menu);
+		$this->assign('search',$search);
+		$this->assign('seo',$seo);
 		return view();
 	}
 	// 退出

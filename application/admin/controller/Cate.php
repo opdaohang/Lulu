@@ -24,7 +24,7 @@ class Cate extends Controller {
 		$setting 	=	Model('Setting')->get(1)->toArray();
 
 		// 获取limit
-		$common_limit	=	$setting['common_limit_num'];
+		$common_limit	=	$setting['admin_limit_num'];
 
 		// 根据page获取列表
 		$cateList = Model('Cate')

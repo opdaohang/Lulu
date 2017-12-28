@@ -21,7 +21,7 @@ class Menu extends Controller{
 		// 获取系统设置
 		$setting 		= Model('Setting')->get(1)->toArray();
 
-		$common_limit 	=	$setting['common_limit_num'];
+		$common_limit 	=	$setting['admin_limit_num'];
 
 
 		// 获取所有菜单

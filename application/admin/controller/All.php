@@ -19,11 +19,17 @@ class All extends Controller {
 			$page = input('page');
 		}
 
+		// 获取setting信息
+		$setting	=	Model('Setting')->where('id',1)->find()->toArray();
+
+		// 分页数量
+		$common_limit	=	$setting['admin_limit_num'];	
+
 		// 获取根据分页所有站点
-		$all = Model('Url')->order('id desc')->limit(10)->page($page)->select();
+		$all = Model('Url')->order('id desc')->limit($common_limit)->page($page)->select();
 
 		// 获取分页
-		$pageination = Model('Url')->order('id desc')->paginate(10);
+		$pageination = Model('Url')->order('id desc')->paginate($common_limit);
 
 		// 获取所有分类
 		$cate = Model('Cate')->order('id','asc')->select();
@@ -68,10 +74,38 @@ class All extends Controller {
 		}
 
 		if($change){
-			$this->success('状态更改成功','admin/all/index');
+			$this->success('状态更改成功');
 		}else{
-			$this->success('状态更改失败','admin/all/index');
+			$this->success('状态更改失败');
 		}
+	}
+	// 只看未审核通过的
+	public function nogo(){
+		// page
+		if(!input('page')){
+			$page 	=	1;
+		}else{
+			$page 	=	input('page');
+		}
+		// 获取系统信息
+		$setting 	=	Model('Setting')->where('id',1)->find()->toArray();
+		$common_limit	=	$setting['admin_limit_num'];
+		// 查询
+		$nogoArr	=	Model('Url')
+		                    ->where('status',0)
+		                    ->order('id desc')
+		                    ->limit($common_limit)
+		                    ->page($page)
+		                    ->select();
+		// 分页
+		$pageination =	Model('Url')
+							->where('status')
+							->paginate($common_limit);
+
+		$this->assign('all',$nogoArr);
+		$this->assign('pageination',$pageination);
+
+		return view();
 	}
 	// 基本信息
 	public function jbxx($type,$id){
@@ -217,7 +251,10 @@ class All extends Controller {
 		if(empty($data) || empty($data['url'])){
 			$this->error('不能为空','admin/all/index');
 		}
-		unset($data['/admin/all/allinsert']);
+		if(isset($data['/admin/all/allinsert'])){
+			unset($data['/admin/all/allinsert']);
+		}
+		
 
 
 
@@ -237,6 +274,9 @@ class All extends Controller {
 
 		// 添加状态为1
 		$data['status'] = 1;
+		// 添加时间
+		$time 	=	@date('Y-m-d H:i:s');
+		$data['time'] = $time;
 
 		// 开始插入
 		$insert = Model('Url')->insert($data);
