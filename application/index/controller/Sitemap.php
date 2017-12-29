@@ -18,7 +18,6 @@ class Sitemap extends Controller{
         
         return view();
     }
-    // 分类链接大全
     public function lists(){
         header('content-type:text/xml');
         // 获取所有分类
@@ -28,7 +27,6 @@ class Sitemap extends Controller{
         
         return view();
     }
-    // 网址链接大全
     public function siteinfo(){
         header('content-type:text/xml');
         // 获取所有url地址
@@ -36,6 +34,15 @@ class Sitemap extends Controller{
         $urlArr = Model('Url')->order('id desc')->limit(50000)->select();
         
         $this->assign('urlArr',$urlArr);
+        
+        return view();
+    }
+    public function search(){
+        header('content-type:text/xml');
+        
+        $searchArr     =    Model('Search')->order('id asc')->limit(50000)->select();
+        
+        $this->assign('searchArr',$searchArr);
         
         return view();
     }
