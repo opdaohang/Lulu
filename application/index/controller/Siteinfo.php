@@ -41,7 +41,10 @@ class Siteinfo extends Controller{
         $tongji_code        =   $setting['tongji_code'];
 
     	// 改变基本信息
-    	$webTitle      	    =	$urlArr['title'].'-'.$urlArr['url'].'-'.$title;
+    	if(preg_match("/https{0,1}:\/\//",$urlArr['url'])){
+    	    $titleUrl     =    preg_replace("/https{0,1}:\/\//",'',$urlArr['url']);
+    	}
+    	$webTitle      	    =	$urlArr['title'].'-'.$titleUrl.'-'.$title;
     	$webKeywords        =	$urlArr['keywords'];
     	$webDescription     =	$urlArr['description'];
 
