@@ -55,14 +55,25 @@ Route::rule('/search','index/search/views');
 // seo
 Route::any('/seo','index/seo/index'); 
 
+// 文章路由
+Route::rule('/addarticle','index/addarticle/index');
+Route::rule('/addarticles','index/addarticle/adds');
+
+// 文章列表
+Route::rule('article','index/addarticle/lists');
+
+Route::get('arcicle/:id','index/addarticle/look',['ext'=>'html']);
+
+// 评论路由
+Route::rule('/artocle/common','index/addarticle/common');
 
 // 批量注册get
 Route::rule([
 	// url路由
-	'siteinfo/:id'	=>	'index/siteinfo/index',
+	'siteinfo/:id'			=>	'index/siteinfo/index',
 	// 分类路由
-	'list/:id'		=>	'index/cate/index',
-
+	'list/:id'				=>	'index/cate/index',
+	// 文章
 ],'','get',['ext'=>'html']);
 
 // 后台

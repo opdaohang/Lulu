@@ -7,9 +7,23 @@
 			<div class="index-cate-title">
 				最新文章
 			</div>
+			{volist name="articleNew" id="articleNew"}
 			<li class="list-group-item">
-				<span class="article-title">标题标题</span>
+				<div class="article-list-title">
+					<a href="{:url('index/addarticle/look',['id'=>$articleNew.id])}">
+						{$articleNew.title}
+					</a>
+				</div>
+				<div class="article-list-description">{$articleNew.description}...</div>
+				<div class="article-list-info">
+					{$articleNew.time}
+					<span class="badge" style="float: right;">
+						{$articleNew.view}
+					</span>
+				</div>
 			</li>
+			{/volist}
+			{$pageination->render()}
 		</div>
 	</div>
 </div>
