@@ -1,12 +1,21 @@
 {include file="../template/admin/common/header.html"}
 <div class="container">
-	
+	<div class="search" style="text-align: center;">
+		<form action="{:url('admin/searchs/index')}" method="get" onsubmit="return search($(this))">
+			<div class="form-inline">
+				<label>搜索：</label>
+				<input type="text" name="s" class="form-control">
+				<input type="submit" value="搜索" class="btn btn-success">
+			</div>
+		</form>
+	</div>
+	<br>
 	<div class="admin-mztj">
 		<ul class="list-group">
 			<li class="list-group-item active">
 			<a href="{:url('admin/all/nogo')}" class="del-btn">->查看未审核网址</a>
 			<span class="btn btn-sm btn-warning del-btn" style="float: right;">
-				<a href="#insert">
+				<a href="javascript:" onclick="insert()">
 					添加
 				</a>
 			</span>
@@ -29,8 +38,8 @@
 					<small style="color: #999;">无描述</small>
 				{/if}
 				<!-- <small style="color: #ff0000;" id="status"></small> -->
-				<span class="btn btn-sm btn-success del-btn" style="float: right; margin-left: 10px;">
-					<a href="{:url('admin/all/del',['id'=>$all.id])}">
+				<span class="btn btn-sm btn-danger del-btn" style="float: right; margin-left: 10px;">
+					<a href="javascript:" onclick="getFw('{:url("admin/all/del",["id"=>$all.id])}','删除')">
 						删除
 					</a>
 				</span>
@@ -41,18 +50,18 @@
 				</span>
 				{if $all.status eq 1}
 					<span class="btn btn-sm btn-success del-btn" style="float: right;margin-left: 10px;">
-						<a href="{:url('admin/all/status',['id'=>$all.id])}">
+						<a href="javascript:" onclick="getFw('{:url("admin/all/status",["id"=>$all.id])}','状态更改')">
 							取消审核
 						</a>
 					</span>
 				{else /}
 					<span class="btn btn-sm btn-danger del-btn" style="float: right;margin-left: 10px;">
-						<a href="{:url('admin/all/status',['id'=>$all.id])}">
+						<a href="javascript:" onclick="getFw('{:url("admin/all/status",["id"=>$all.id])}','状态更改')">
 							审核
 						</a>
 					</span>
 				{/if}
-				<span class="btn btn-sm btn-danger del-btn" style="float: right;" onclick="updateJbxx('{:url("admin/all/jbxx",["type"=>"id","id"=>$all.id])}')">
+				<span class="btn btn-sm btn-success del-btn" style="float: right;" onclick="updateJbxx('{:url("admin/all/jbxx",["type"=>"id","id"=>$all.id])}')">
 						更新信息
 				</span>
 				
@@ -65,8 +74,8 @@
 	
 	<!--  -->
 	<div class="admin-all-insert">
-		<h4>添加</h4><a name="insert"></a>
-		<form action="{:url('admin/all/allinsert')}" method="post">
+		<h4 id='insert-map'>添加</h4><a name="insert"></a>
+		<form action="{:url('admin/all/allinsert')}" method="post" onsubmit="return postFw($(this),'添加')">
 			<div class="form-group">
 				<label>分类</label>
 				<select name='cate' class="form-control">
@@ -90,6 +99,7 @@
 				<label>
 					网站URL&nbsp;&nbsp;
 					<span class="btn btn-sm btn-warning" id="insertjbxx">获取信息</span>
+					<span class="btn btn-sm btn-default" id="selectrepeat">是否有此网址</span>
 				</label>
 				<input type="text" name="url" class="form-control" id="wurl">
 			</div>

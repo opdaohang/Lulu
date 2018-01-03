@@ -2,7 +2,7 @@
 <div class="container">
 	<h3>系统设置</h3>
 	<div class="admin-setting">
-		<form action="{:url('admin/setting/edit')}" method="post">
+		<form action="{:url('admin/setting/edit')}" method="post" onsubmit="return postFw($(this),'修改')">
 			<div class="form-group">
 				<label>网站标题</label>
 				<input type="text" name="web_title" class="form-control" value="{$setting.web_title}">

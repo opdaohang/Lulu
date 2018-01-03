@@ -4,7 +4,7 @@
 		<ul class="list-group">
 			<li class="list-group-item active">
 				所有菜单
-				<span class="btn btn-sm btn-warning del-btn" style="float: right;">
+				<span class="btn btn-sm btn-warning del-btn" style="float: right;" onclick="insert()">
 					添加
 				</span>
 			</li>
@@ -12,7 +12,7 @@
 				<li class="list-group-item">
 					【{$menuArr.title}】&nbsp;&nbsp;优先级：{$menuArr.top}
 					<span class="btn ben-sm btn-danger del-btn" style="float: right;margin-left: 10px;">
-						<a href="{:url('admin/menu/del',['id'=>$menuArr.id])}">
+						<a href="javascript:" onclick="getFw('{:url("admin/menu/del",["id"=>$menuArr.id])}','删除')">
 							删除
 						</a>
 					</span>
@@ -27,8 +27,8 @@
 		{$pageArr->render()}
 	</div>
 	<div class="insert">
-		<h3>添加</h3>
-		<form action="{:url('admin/menu/inserts')}" method="post">
+		<h3 id="insert-map">添加</h3>
+		<form action="{:url('admin/menu/inserts')}" method="post" onsubmit="return postFw($(this),'添加')">
 			<div class="form-group">
 				<label>菜单名称</label>
 				<input type="text" name="title" class="form-control">

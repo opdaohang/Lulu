@@ -1,0 +1,47 @@
+{include file="../template/admin/common/header.html"}
+<div class="container">
+	<ul class="list-group">
+		<li class="list-group-item active">
+		友情链接管理
+		<span class="btn btn-sm btn-warning del-btn" style="float: right;">
+				<a href="javascript:" onclick="insert()">
+					添加
+				</a>
+			</span>
+		</li>
+		{volist name="linkArr" id='linkArr'}
+		
+			<li class="list-group-item">
+				ID:{$linkArr.id}&nbsp;&nbsp;标题：{$linkArr.title}
+				<span class="btn btn-sm btn-danger del-btn" style="float: right;">
+					<a href="javascript:" onclick="getFw('{:url("admin/links/del",["id"=>$linkArr.id])}','删除')">
+						删除
+					</a>
+				</span>
+				<span class="btn btn-sm btn-success del-btn" style="float: right;margin-right: 10px;">
+					<a href="{:url('admin/links/edit',['id'=>$linkArr.id])}">
+						编辑
+					</a>
+				</span>
+			</li>
+		{/volist}
+	</ul>
+	{$pageination->render()}
+	<div class="admin-links-insert">
+		<h4 id="">添加</h4>
+		<form action="{:url('admin/links/linksinsert')}" method="post" onsubmit="return postFw($(this),'添加')">
+			<div class="form-group">
+				<label>标题</label>
+				<input type="text" name="title" class="form-control">
+			</div>
+			<div class="form-group">
+				<label>链接</label>
+				<input type="text" name="url" class="form-control">
+			</div>
+			<div class="form-group">
+				<input type="submit" value="提交" class="btn btn-success">
+			</div>
+		</form>
+	</div>
+</div>
+{include file="../template/admin/common/footer.html"}

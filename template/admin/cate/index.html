@@ -3,7 +3,7 @@
 <div class="container">
 	<div class="admin-cate">
 		<div class="admin-cate-insert" style="text-align: center;">
-			<form action="{:url('admin/cate/cateinsert')}" method="post">
+			<form action="{:url('admin/cate/cateinsert')}" method="post" id="cate-insert-form" onsubmit="return postFw($(this),'添加')">
 				<div class="form-inline">
 					<!-- <label>添加分类</label><br> -->
 					<label>分类名称：</label>
@@ -20,8 +20,8 @@
 					<a href="{:url('index/cate/index',['id'=>$clist.id])}" target="_blank">
 						{$clist.title}
 					</a>
-					<span class="btn btn-sm btn-success del-btn" style="float: right;color: #fff;margin-left:10px;">
-						<a href="{:url('admin/cate/catedel',['id'=>$clist.id])}">
+					<span class="btn btn-sm btn-danger del-btn" style="float: right;color: #fff;margin-left:10px;">
+						<a href="javascript:" onclick="getFw('{:url("admin/cate/catedel",["id"=>$clist.id])}','删除')">
 							删除
 						</a>
 					</span>

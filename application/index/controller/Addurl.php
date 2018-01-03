@@ -68,12 +68,12 @@ class Addurl extends Controller{
 		
 		// 正则表达式匹配
 		if(!preg_match("/https{0,1}:\/\//", $data['url'])){
-			$this->error('网址不规范',url('index/addurl/index'));
+			return json(['sutus'=>'error','msg'=>'urlerror']);
 		}
 
 		// 匹配验证码
 		if(!captcha_check($data['yzm'])){
-			$this->error('验证码不匹配',url('index/addurl/index'));
+			return json(['status'=>'error','msg'=>'yzmerror']);
 		}
 		
 		// 检测网址最后一位是否有/
@@ -88,7 +88,7 @@ class Addurl extends Controller{
 		$select = Model('Url')->where('url',$data['url'])->count();
 		
 		if($select > 0){
-			$this->error('已经有这个数据，请勿重复提交',url('index/addurl/index'));
+			return json(['status'=>'error','msg'=>'urlrepeat']);
 			exit;
 		}
 	
@@ -102,35 +102,10 @@ class Addurl extends Controller{
 		// 如果都匹配
 		$insert	=	Model('Url')->insert($insertData);
 		if(!$insert){
-			$this->error('系统错误，请联系管理员',url('index/addurl/index'));
+			return json(['status'=>'error','msg'=>'xitong']);
 		}else{
-			$this->success('提交成功，请等待审核',url('index/addurl/index'));
+			return json(['status'=>'yes','msg'=>'yes']);
 		}
-
-	}
-	// 更新网站数据
-	public function updates($url){
-		if(!$url){
-			exit;
-		}
-		// 初始化curl
-		$ch = curl_init();
-		@curl_setopt($ch, CURLOPT_URL, $url);
-		@curl_setopt($ch, CURLOPT_RETURNTRANSFER,1);
-		@curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);  
-		@curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, true); 
-		// 执行
-		$html 	= curl_exec($ch);
-		curl_close($ch);
-
-		// 标题
-		$pptitle	= 	preg_match("/<title>(.*)<\/title>/", $html,$titleArr);
-		if($pptitle){
-			$titles  =  $titleArr[1];
-		}
-
-		// 更新网站标题
-		$updates = Model('Url')->where('url',$url)->update(['title'=>$titles]);
 
 	}
 	public function _empty(){

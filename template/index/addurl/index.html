@@ -10,11 +10,11 @@
 		2、请务必选择正确地区，地区选择按照备案地区来选择。如没有备案，请根据自己的位置来选择<br>
 		3、请提交主域，不得提交二级目录或者某个页面。</div>
 		<div class="add-box-form">
-			<form action="{:url('index/addurl/adds')}" method="post">
+			<form action="{:url('index/addurl/adds')}" method="post" onsubmit="return false;" id="addurl-form">
 				<!-- 地区 -->
 				<div class="form-group">
 					<label>选择地区：</label>
-					<select name="cate" class="form-control">
+					<select name="cate" class="form-control" id="addurl-cate">
 						{volist name="cate" id="cate"}
 							<option value="{$cate.id}">{$cate.title}</option>
 						{/volist}
@@ -23,19 +23,23 @@
 				<!-- 链接地址 -->
 				<div class="form-group">
 					<label>链接地址：</label>
-					<input type="text" name="url" class="form-control">
+					<input type="text" name="url" class="form-control" id="addurl-url">
 				</div>
 				<!-- 验证码 -->
 				<div class="form-inline">
 					<label>验证码：</label>
-					<input type="text" name="yzm" class="form-control">
+					<input type="text" name="yzm" class="form-control" id="addurl-yzm">
 					<img src="{:captcha_src()}" alt="captcha" onclick="this.src='{:captcha_src()}'" width="150" />
 				</div><br>
 				<div class="form-group">
-					<input type="submit" value="提交" class="btn btn-danger">
+					<input type="submit" value="提交" class="btn btn-danger" id="addurl">
 				</div>
 			</form>
 		</div>
 	</div>
 </div>	
+<!-- 提示框框 -->
+<div class="container alert alert-success addurl-tips">
+		www.ioululu.com
+</div>
 {include file="../template/index/common/footer.html"}

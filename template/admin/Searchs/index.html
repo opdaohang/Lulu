@@ -1,0 +1,54 @@
+{include file="../template/admin/common/header.html"}
+<div class="container">
+	<ul class="list-group">
+		<li class="list-group-item active">[{$wd}]的搜索结果</li>
+		{volist name="all" id="all"}
+			<li class="list-group-item">
+				{if $all.fast eq 1}
+					<img src="http://{$_SERVER['HTTP_HOST']}/static/admin/img/fast-audit.png" width="20">
+				{/if}
+				{if $all.status eq 0}
+					<img src="http://{$_SERVER['HTTP_HOST']}/static/admin/img/no-audit.png" width="30">
+				{else/}
+					<img src="http://{$_SERVER['HTTP_HOST']}/static/admin/img/yes-audit.png" width="30">
+				{/if}
+				{$all.title}-<small>[{$all.url}]</small>
+				{if $all.keywords == ''}
+					<small style="color: #999;">无关键词</small>
+				{/if}
+				{if $all.description == ''}
+					<small style="color: #999;">无描述</small>
+				{/if}
+				<!-- <small style="color: #ff0000;" id="status"></small> -->
+				<span class="btn btn-sm btn-danger del-btn" style="float: right; margin-left: 10px;">
+					<a href="javascript:" onclick="getFw('{:url("admin/all/del",["id"=>$all.id])}','删除')">
+						删除
+					</a>
+				</span>
+				<span class="btn btn-sm btn-success del-btn" style="float: right; margin-left: 10px;">
+					<a href="{:url('admin/all/edit',['id'=>$all.id])}">
+						编辑
+					</a>
+				</span>
+				{if $all.status eq 1}
+					<span class="btn btn-sm btn-success del-btn" style="float: right;margin-left: 10px;">
+						<a href="javascript:" onclick="getFw('{:url("admin/all/status",["id"=>$all.id])}','状态更改')">
+							取消审核
+						</a>
+					</span>
+				{else /}
+					<span class="btn btn-sm btn-danger del-btn" style="float: right;margin-left: 10px;">
+						<a href="javascript:" onclick="getFw('{:url("admin/all/status",["id"=>$all.id])}','状态更改')">
+							审核
+						</a>
+					</span>
+				{/if}
+				<span class="btn btn-sm btn-success del-btn" style="float: right;" onclick="updateJbxx('{:url("admin/all/jbxx",["type"=>"id","id"=>$all.id])}')">
+						更新信息
+				</span>
+			</li>
+		{/volist}
+		{$pageination->render()}
+	</ul>
+</div>
+{include file="../template/admin/common/footer.html"}

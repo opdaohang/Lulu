@@ -53,7 +53,7 @@ class All extends Controller {
 		if($delete){
 			$this->success('删除成功','admin/all/index');
 		}else{
-			$this->success('删除失败','admin/all/index');
+			$this->error('删除失败','admin/all/index');
 		}
 	}
 	// 状态
@@ -76,7 +76,7 @@ class All extends Controller {
 		if($change){
 			$this->success('状态更改成功');
 		}else{
-			$this->success('状态更改失败');
+			$this->error('状态更改失败');
 		}
 	}
 	// 只看未审核通过的
@@ -268,7 +268,7 @@ class All extends Controller {
 		// 检查是否有同样网址
 		$same = Model('Url')->where('url',$data['url'])->find();
 		if($same){
-			$this->success('已有此网址','admin/all/index');
+			$this->error('已有此网址','admin/all/index');
 			exit;
 		}
 
@@ -283,7 +283,7 @@ class All extends Controller {
 		if($insert){
 			$this->success('添加成功','admin/all/index');
 		}else{
-			$this->success('添加失败','admin/all/index');
+			$this->error('添加失败','admin/all/index');
 		}
 	}
 
@@ -326,13 +326,37 @@ class All extends Controller {
 		if(!$data){
 			exit;
 		}
-		// dump($data);
 		$update = Model('Url')->where('id',$data['id'])->update($data);
 		if($update){
 			$this->success('更新成功','admin/all/index');
 		}else{
 			$this->error('更新失败','admin/all/index');
 		}
+	}
+	// 查询是否有此网址
+	public function repeat(){
+		// 判断session
+		if(session::get('administer') != 1 || !session::has('administer')){
+			$this->redirect(url('admin/login/index'));
+		}
+		
+		$data =	input('post.');
+		$url  = $data['url'];
+		// 处理尾号
+		// 检查网址最后一位是否为/
+		$strlen = strlen($url);
+		$strright = strripos($url,'/');
+		if($strright == $strlen-1){
+			$url = substr($url, 0,$strlen-1);
+		}
+
+		$repeat	=	Model('Url')->where('url',$url)->find();
+		if($repeat){
+			return 'yes';
+		}else{
+			return 'no';
+		}
+
 	}
 	public function _empty(){
 		$this->redirect(url('admin/login/index'));

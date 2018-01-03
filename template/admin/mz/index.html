@@ -5,7 +5,7 @@
 			<li class="list-group-item active">
 				名站推荐
 				<span class="btn btn-sm btn-warning del-btn" style="float: right;">
-					<a href="#insert">
+					<a href="javascript:" onclick="insert()">
 						添加
 					</a>
 				</span>
@@ -13,8 +13,8 @@
 			{volist name="all" id="all"}
 			<li class="list-group-item">
 				{$all.title}
-				<span class="btn btn-sm btn-success del-btn" style="float: right;margin-left: 10px;">
-					<a href="{:url('admin/mz/del',['id'=>$all.id])}">
+				<span class="btn btn-sm btn-danger del-btn" style="float: right;margin-left: 10px;">
+						<a href="javascript:" onclick="getFw('{:url("admin/mz/del",["id"=>$all.id])}','删除')">
 						删除
 					</a>
 				</span>
@@ -29,8 +29,8 @@
 		</ul>
 	</div>
 	<div class="admin-mztj-insert">
-		<h4>添加</h4><a name="insert"></a>
-		<form action="{:url('admin/mz/insert')}" method="post">
+		<h4 id="insert-map">添加</h4><a name="insert"></a>
+		<form action="{:url('admin/mz/insert')}" method="post" onsubmit="return postFw($(this),'添加')">
 			<div class="form-group">
 				<label>名称：</label>
 				<input type="text" name="title" class="form-control">

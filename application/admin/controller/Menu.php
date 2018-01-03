@@ -49,7 +49,7 @@ class Menu extends Controller{
 		if($insert){
 			$this->success('添加成功',url('admin/menu/index'));
 		}else{
-			$this->success('添加失败',url('admin/menu/index'));
+			$this->error('添加失败',url('admin/menu/index'));
 		}
 		dump($data);
 	}
@@ -62,9 +62,9 @@ class Menu extends Controller{
 
 		$del = Model('Menu')->where('id',$id)->delete();
 		if($del){
-			echo "yes";
+			$this->success('删除成功',url('admin/menu/index'));
 		}else{
-			echo "no";
+			$this->error('删除失败',url('admin/menu/index'));
 		}
 	}
 	public function edit($id){
