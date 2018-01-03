@@ -1,0 +1,121 @@
+{include file="../template/index/common/header.html"}
+<div class="container">
+	<div class="add-box-title">
+		<h3>文章投稿</h3>
+	</div>	
+	<div class="alert alert-warning"><b>本站收录文章资讯，需要注意以下三点事项：</b><br>
+		1、标题不得有超链接，如果有，一律不通过<br>
+		2、内容超链接不得大于3个<br>
+		3、如果文章非原创，请务必注明来源链接</div>
+	<div class="form-box">
+		<form action="{:url('index/addarticle/adds')}" method="post" onsubmit="return article($(this));">
+			<div class="form-inline">
+				<label>文章来源(超链接)：</label>
+				<input type="text" name="source" class="form-control" id="source">&nbsp;&nbsp;
+				<label>作者名称：</label>
+				<input type="text" name="username" class="form-control" id="username">&nbsp;&nbsp;
+				<label>联系方式(邮箱电话或者qq)：</label>
+				<input type="text" name="lianxi" class="form-control" id="lianxi">&nbsp;&nbsp;
+			</div><br>
+			<div class="form-group">
+				<label>文章标题*</label>
+				<input type="text" name="title" class="form-control" id="title">
+			</div>		
+			<div class="form-group">
+				<label>文章内容*</label>
+				<div id="content"></div>
+			</div>
+			<div class="form-group">
+				<label>关键词(英文逗号分割，否则识别失败)：</label>
+				<input type="text" name="keywords" class="form-control" id="keywords">
+			</div>
+			<div class="form-group">
+				<label>描述(不输入则没有描述)：</label>
+				<textarea name="description" id="description" class="form-control"></textarea>
+			</div>
+			<div class="form-group">
+				<input type="submit" value="提交" class="btn btn-success" id="btns">
+			</div>
+		</form>
+	</div>
+</div>
+<!-- 提示框框 -->
+<div class="container alert alert-success addurl-tips">
+		www.ioululu.com
+</div>
+<!-- 引入wangEdit -->
+<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script src="http://{$_SERVER['HTTP_HOST']}/static/index/js/jquery.session.js"></script>
+<script src="http://{$_SERVER['HTTP_HOST']}/static/index/js/wangEditor.min.js"></script>
+<script type="text/javascript">
+	var E = window.wangEditor
+	var editor2 = new E('#content')
+	editor2.create()
+
+// 获取cookie
+$(function(){
+	uCookie = getCookie("username");
+	if(uCookie){
+		$('#username').val(uCookie);
+		$('#btns').attr('disabled',"true").val("一天只能投稿一篇");
+	}
+})
+// 文章
+function article(e){
+	// 获得标题
+	var title 		= 	$("#title").val();
+	//	来源	
+	var source 		=	$('#source').val();
+	// 内容
+	var content		=	editor2.txt.html();
+	// 	关键词
+	var keywords	=	$("#keywords").val();
+	// 联系方式
+	var lianxi		=	$("#lianxi").val();
+	// 名称
+	var username	=	$('#username').val();
+	// 获得action
+	var url 		= 	e.attr('action');
+	// 获得描述
+	var description =	$("#description").val();
+
+	var tips 		=	$('.addurl-tips');
+
+
+	// 判断是否为空
+	if(title.length == 0){
+		tips.html('标题不能为空').fadeIn(500);
+		setTimeout(tips.fadeOut(1000),3000);
+		return false;
+	}
+	if(content.length == 11){
+		tips.html('内容不能为空').fadeIn(500);
+		setTimeout(tips.fadeOut(1000),3000);
+		return false;
+	}
+	if(username.length == 0){
+		tips.html('作者不能为空').fadeIn(500);
+		setTimeout(tips.fadeOut(1000),3000);
+		return false;
+	}
+
+	// 发送post
+	$.ajax({
+		type:'post',
+		url:url,
+		data:{'title':title,'source':source,'content':content,'keywords':keywords,'description':description,'lianxi':lianxi,'username':username},
+		success:function(msg){
+			if(msg['code'] == 1){
+				tips.html('添加成功').fadeIn(500);
+				setCookie('username',username);
+			}else{
+				tips.html('添加失败').fadeIn(500);
+			}
+			setTimeout(tips.fadeOut(1000),3000);
+		}
+	});
+
+	return false;
+}	
+</script>
+{include file="../template/index/common/footer.html"}
