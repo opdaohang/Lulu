@@ -313,7 +313,13 @@ class Addarticle extends Controller {
 		if(!$data['content']){
 			$this->error('评论失败');
 		}
-        
+
+        // 验证验证码
+        if(!captcha_check($data['yzm'])){
+          //验证失败
+            $this->error('验证码错误');
+        };
+
         // 获取ip
         $request = Request::instance();
         $ip = $request->ip();

@@ -45,12 +45,13 @@
 						<textarea class="form-control" name="content" style="min-height: 100px;"></textarea>
 					</div>
 					<div class="form-inline" style="text-align: center;">
-						<label>昵称：</label>
-						<input type="text" name="username" class="form-control" placeholder="可选">
+						<!-- <label>昵称：</label> -->
+						<!-- <input type="text" name="username" class="form-control" placeholder="可选"> -->
 						<label>用户主页:</label>
 						<input type="text" name="userurl" class="form-control" placeholder="可选">
-					</div>
-					<div class="form-group">
+						<label>验证码</label>
+						<img src="{:captcha_src()}" width="120" onclick="this.src='{:captcha_src()}'">
+						<input type="text" name="yzm" class="form-control" placeholder="必填">
 						<input type="submit" class="btn btn-sm btn-success" value="评论">
 					</div>
 				</form>

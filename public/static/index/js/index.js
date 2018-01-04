@@ -116,13 +116,16 @@ function common(e){
 	var userurl		=	$('input[name="userurl"]').val();
 	// id
 	var post_id		=	$('input[name="post_id"]').val();
+	// 获取验证码
+	var yzm 		=	$('input[name="yzm"]').val();
+
 	var tip 		=	$('.addurl-tips');
 
 
 	// 开始提交
 	$.ajax({
 		type:'post',
-		data:{'content':content,'username':username,'userurl':userurl,'post_id':post_id},
+		data:{'content':content,'username':username,'userurl':userurl,'post_id':post_id,'yzm':yzm},
 		url:url,
 		success:function(msg){
 			if(msg['code'] == 1){
