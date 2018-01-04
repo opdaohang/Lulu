@@ -5,6 +5,7 @@ use think\Model;
 use think\Controller;
 use think\Cookie;
 use think\Session;
+use think\Request;
 
 class Addarticle extends Controller {
 	public function index(){
@@ -312,6 +313,12 @@ class Addarticle extends Controller {
 		if(!$data['content']){
 			$this->error('评论失败');
 		}
+        
+        // 获取ip
+        $request = Request::instance();
+        $ip = $request->ip();
+        $data['ip'] = $ip;
+
 
 		if(empty($data['username'])){
 			$data['username'] 	= "匿名用户" . rand(0,9) . rand(0,9) . rand(0,9) . rand(0,9);
@@ -328,7 +335,7 @@ class Addarticle extends Controller {
 
 		$add 	=	Model('Common')->insert($data);
 		if($add){
-			// 设置session
+			// 设置cookie
 			$this->success('评论成功');
 		}else{
 			$this->error('评论失败');
