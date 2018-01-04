@@ -117,7 +117,7 @@ class Addarticle extends Controller {
     	$common_limit 		=	$setting['common_limit_num'];
     	// 重新赋值标题
     	if($page >= 2){
-    		$webTitle 		=	"文章资讯-第{$page}页".$title;
+    		$webTitle 		=	"文章资讯-第{$page}页-".$title;
     		// 判断是否恶意输入页数
     		// 总数量
     		$allNum	=	Model('Article')->where('status',1)->count();
