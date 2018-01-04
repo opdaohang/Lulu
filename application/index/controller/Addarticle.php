@@ -84,7 +84,7 @@ class Addarticle extends Controller {
 		$insert = Model('Article')->insert($data);
 		if($insert){
             // 设置session
-            Cookie::set('add','no',['expire'=>3600]);
+            Cookie::set('add','no',['expire'=>3600*5]);
 			$this->success('添加成功，请等待审核');
 		}else{
 			$this->error('添加失败请检查未填项');
