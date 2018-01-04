@@ -1,0 +1,274 @@
+/*
+
+*/
+.common-nav {
+	height: 50px;
+	line-height: 50px;
+	background: #04859d;
+	color:#fff;
+}
+.common-nav a {
+	color: #fff;
+	text-decoration: none;
+}
+.common-logo {
+	float: left;
+	font-weight: bold;
+	font-size: 16px;
+}
+.common-nav-list {
+	float: right;
+}
+.common-nav-list ul {
+	list-style: none;
+}
+.common-nav-list li {
+	display: inline-block;
+	float: left;
+	padding-left: 10px;
+	padding-right: 10px;
+}
+.common-nav-mobile {
+	display: none;
+	width: 35px;
+	height: 35px;
+	float: right;
+}
+.common-nav-mobile img{
+	width: 100%;
+}
+/*  index cate  */
+.index-cate {
+	/*border:1px solid #999;*/
+	position: relative;
+	left: -5px;
+}
+.index-cate-title {
+	padding-top: 5px;
+	padding-bottom: 5px;
+	padding-left: 10px;
+	border-left: 5px solid #04859d;
+}
+.index-cate-list {
+
+}
+.index-cate-list ul {
+	list-style: none;
+	padding:0;
+	padding-left: 10px;
+}
+.index-cate-list li {
+	display: inline-block;
+	padding-left: 5px;
+	padding-right: 5px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+}
+.index-cate-ads {
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+.index-cate-ads img {
+	width: 100%;
+}
+/*  index web  */
+.index-web {
+	/*border: 1px solid #999;*/
+	position: relative;
+	left: 5px;
+}
+.index-web-title {
+	padding-top: 5px;
+	padding-bottom: 5px;
+	padding-left: 10px;
+	border-left: 5px solid #04859d;
+}
+.index-web-mztj {
+
+}
+.index-web-mztj ul {
+	list-style: none;
+	padding: 0;
+}
+.index-web-mztj li {
+	display: inline-block;
+	padding-left: 15px;
+	padding-right: 15px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+/* index-links */
+.index-links-title {
+	padding-top: 5px;
+	padding-bottom: 5px;
+	padding-left: 10px;
+	border-left: 5px solid #04859d;
+}
+.index-links-list {
+}
+.index-links-list ul {
+	list-style: none;
+	padding: 0;
+}
+.index-links-list li{
+	display: inline-block;
+	padding-left: 15px;
+	padding-right: 15px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+/* common-footer */
+.common-footer {
+	margin-top:10px;
+	height: 40px;
+	line-height: 40px;
+	border-top: 2px solid #04859d;
+	text-align: center;
+}
+
+/* siteinfo */
+.siteinfo {
+	margin-top:10px;
+}
+.siteinfo-info {
+	position: relative;
+	left:-5px;
+}
+.siteinfo-info-title {
+	padding-top: 5px;
+	padding-bottom: 5px;
+	padding-left: 10px;
+	border-left: 5px solid #04859d;
+}
+.siteinfo-sidebar  {
+	position: relative;
+	left:5px;
+}
+.siteinfo-sidebar-title {
+	padding-top: 5px;
+	padding-bottom: 5px;
+	padding-left: 10px;
+	border-left: 5px solid #04859d;
+}
+.siteinfo-info-content {
+	margin-top:10px;
+}
+.siteinfo-info-content-pic {
+
+}
+.siteinfo-info-content-info {
+
+}
+.siteinfo-info-content-info ul {
+	list-style: none;
+	padding:0;
+}
+.siteinfo-info-content-info li {
+	display: block;
+	padding-top: 5px;
+	padding-bottom: 5px;
+}
+.siteinfo-cai-list {
+
+}
+.siteinfo-cai-list ul {
+	list-style: none;
+	padding:0;
+}
+.siteinfo-cai-list li {
+	display: inline-block;
+	padding-left: 15px;
+	padding-right: 15px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+.siteinfo-sidebar-list {
+
+}
+.siteinfo-sidebar-list ul{
+	padding: 0;
+}
+/* cate-info */
+.cate-info {
+	margin-top:10px;
+}
+.cate-info-content-list {
+	padding-top: 10px;
+}
+.cate-info-content-list ul {
+	list-style: none;
+	padding: 0;
+}
+.cate-info-content-list li {
+	display: block;
+	padding-top: 5px;
+	padding-bottom: 5px;
+}
+/* add-box */
+.add-box {
+	margin-top:10px;
+}
+.add-box-title {
+	border-left:5px solid #04859d;
+	padding-left: 10px;
+}
+/*page*/
+.pagination li{
+	display: inline-block;
+}
+.searchs {
+	display: block;
+	height: 50px;
+	line-height: 50px;
+	text-align: center;
+	background-color: #fff;
+}
+.addurl-tips {
+	width: 50%;
+	position: fixed;
+	top:20%;
+	left: 25%;
+	border: 1px solid #fff;
+	text-align: center;
+	display: none;
+}
+
+/*
+
+*/
+.article-list-title {
+	font-size: 18px;;
+}
+.article-list-description {
+	color: #999;padding-top: 5px;
+}
+.article-list-info {
+	padding-top: 3px;padding-bottom: 3px;
+}
+
+/*
+
+*/
+.article-title {
+	width: 100%;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	text-align: center;
+	font-weight: bold;
+	font-size: 20px;
+}
+.article-info {
+	width: 100%;
+	text-align: center;
+}
+.article-content {
+	min-height: 500px;
+	padding-top: 10px;
+}
+/**/
+.article-common {
+
+}
+.commin-new {
+	margin-top:5px;
+}

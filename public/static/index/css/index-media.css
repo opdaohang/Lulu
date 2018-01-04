@@ -1,0 +1,32 @@
+@media screen and (max-width: 800px){
+	.common-nav-list {
+		display: none;
+		width: 100%;
+		background-color: #fff;
+		position: fixed;
+		top:50px;
+		left: 0;
+		z-index: 99;
+	}
+	.common-nav-list ul{
+		padding: 0;
+		text-align: center;
+		background-color: #fff;
+	}
+	.common-nav-list li {
+		display: block;
+		color: #04859d;
+	}
+	.common-nav-list li a {
+		color: #000;
+	}
+	.common-mav-list li a:hover {
+		text-decoration: none;
+	}
+	.index-cate {
+		display: none;
+	}
+	.common-nav-mobile {
+		display: block;
+	}
+}
