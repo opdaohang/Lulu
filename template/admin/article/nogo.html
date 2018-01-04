@@ -1,0 +1,50 @@
+{include file="../template/admin/common/header.html"}
+<div class="container">
+	<ul class="list-group">
+		<li class="list-group-item active">
+			<a href="{:url('admin/article/index')}" class="btn del-btn">
+				查看所有
+			</a>
+			<span class="btn btn-sm btn-warning" style="float: right;" onclick="insert()">添加</span>
+		</li>
+		{volist name="articleArr" id="articleArr"}
+		<li class="list-group-item">
+			{$articleArr.title}
+			<!-- 删除 -->
+			<span class="btn btn-sm btn-danger del-btn" style="float: right;">
+				<a href="javascript:" onclick="getFw('{:url("admin/article/del",["id"=>$articleArr.id])}','删除')">
+					删除
+				</a>
+			</span>
+			<!-- 编辑 -->
+			<span class="btn btn-sm btn-success del-btn" style="float: right;margin-right: 10px;">
+				<a href="{:url('admin/article/edit',['id'=>$articleArr.id])}">
+					编辑
+				</a>
+			</span>
+			<!-- 预览 -->
+			<span class="btn btn-sm btn-success del-btn" style="float: right;margin-right: 10px;">
+				<a href="javascript:" onclick="window.open('http://{$_SERVER["HTTP_HOST"]}{:url("index/addarticle/look",["id"=>$articleArr.id])}')">
+					预览
+				</a>
+			</span>
+			<!-- 审核 -->
+			{if $articleArr.status eq 0}
+			<span class="btn btn-sm btn-warning del-btn" style="float: right;margin-right: 10px;">
+				<a href="javascript:" onclick="getFw('{:url("admin/article/status",["id"=>$articleArr.id])}','状态更改')">
+					审核
+				</a>
+			</span>
+			{else /}
+			<span class="btn btn-sm btn-success del-btn" style="float: right;margin-right: 10px;">
+				<a href="javascript:" onclick="getFw('{:url("admin/article/status",["id"=>$articleArr.id])}','状态更改')">
+					取消审核
+				</a>
+			</span>
+			{/if}
+		</li>
+		{/volist}
+		{$pageination->render()}
+	</ul>
+</div>
+{include file="../template/admin/common/footer.html"}

@@ -121,6 +121,94 @@ class Article extends Controller {
 			$this->error('添加失败请检查未填项');
 		}		
 	}
+	// 编辑
+	public function edit($id){
+		// 判断session
+		if(session::get('administer') != 1 || !session::has('administer')){
+			$this->redirect(url('admin/login/index'));
+		}
+
+		// 获取信息
+		$message = Model('Article')->get($id)->toArray();
+
+		// 转换
+		foreach ($message as $key => $value) {
+			$message[$key]  = htmlspecialchars_decode($message[$key]);
+		}
+
+		$this->assign('message',$message);
+		return view();
+	}
+	// 更新
+	public function update(){
+		// 判断session
+		if(session::get('administer') != 1 || !session::has('administer')){
+			$this->redirect(url('admin/login/index'));
+		}
+
+		$data = input('post.');
+		if(!$data){
+			$this->error('错误');
+		}
+		// 处理描述
+		$description = $data['description'];
+		$description = strip_tags($description);
+		$description = preg_replace("/\s+/", '', $description);
+		$description = preg_replace("/\/n/", '', $description);
+		$description = preg_replace("/\/r/", '', $description);
+		$description = mb_substr($description, 0,100);
+		$data['description'] = $description;
+		
+		// 转义html
+		foreach ($data as $key => $value) {
+			$data[$key] = htmlspecialchars($data[$key]);
+		}
+		// 去除标签
+		// 开始更新
+		$update = Model('Article')->where('id',$data['id'])->update($data);
+		if($update){
+			$this->success('更新成功');
+		}else{
+			$this->success('更新失败');
+		}
+	}
+	// 查看所有未审核
+	public function nogo(){
+		// 判断session
+		if(session::get('administer') != 1 || !session::has('administer')){
+			$this->redirect(url('admin/login/index'));
+		}
+
+		// 判断page
+		if(!input('?page')){
+			$page 		= 	1;
+		}else{
+			$page 		= 	input('page');
+		}
+
+		// 获取setting信息
+		$setting		=	Model('Setting')->where('id',1)->find()->toArray();
+
+		// 分页数量
+		$common_limit	=	$setting['admin_limit_num'];
+
+		// 获取文章
+		$articleArr		=	Model('Article')
+								->where('status',0)
+								->order('id desc')
+								->limit($common_limit)
+								->page($page)
+								->select();
+
+		// 分页
+		$pageination 	=	Model('Article')->where('status',1)->paginate($common_limit);
+
+		// 赋值
+		$this->assign('articleArr',$articleArr);
+		$this->assign('pageination',$pageination);
+
+		return view();
+	}
 }
 
 ?>

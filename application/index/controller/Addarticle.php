@@ -3,6 +3,8 @@ namespace app\index\controller;
 
 use think\Model;
 use think\Controller;
+use think\Cookie;
+use think\Session;
 
 class Addarticle extends Controller {
 	public function index(){
@@ -30,6 +32,7 @@ class Addarticle extends Controller {
     					->order('id asc')
     					->select();
 
+        
 
     	// 赋值网站基本信息
     	$this->assign('title',$title);
@@ -50,10 +53,17 @@ class Addarticle extends Controller {
 		return view();
 	}
 	public function adds(){
-		$data = input();
-		if(isset($data['/index/addarticle/adds'])){
-			unset($data['/index/addarticle/adds']);
-		}
+		$data = input('post.');
+
+        // 截取描述字数
+        // 处理描述
+        $description = $data['description'];
+        $description = strip_tags($description);
+        $description = preg_replace("/\s+/", '', $description);
+        $description = preg_replace("/\/n/", '', $description);
+        $description = preg_replace("/\/r/", '', $description);
+        $description = mb_substr($description, 0,100);
+        $data['description'] = $description;
 		
 
 		// 开始过滤
@@ -61,10 +71,7 @@ class Addarticle extends Controller {
 			$data[$key] = htmlspecialchars($data[$key]);
 		}
 
-		// 截取描述字数
-		if(mb_strlen($data['description']) > 65){
-			$data['description'] = mb_substr($data['description'], 0,65);
-		}
+
 		
 
 		// 添加时间参数与状态
@@ -76,6 +83,8 @@ class Addarticle extends Controller {
 		// 开始插入
 		$insert = Model('Article')->insert($data);
 		if($insert){
+            // 设置session
+            Cookie::set('add','no',['expire'=>3600]);
 			$this->success('添加成功，请等待审核');
 		}else{
 			$this->error('添加失败请检查未填项');
@@ -111,7 +120,7 @@ class Addarticle extends Controller {
     		// 判断是否恶意输入页数
     		// 总数量
     		$allNum	=	Model('Article')->where('status',1)->count();
-    		if(ceil($allNum/$common_limit < $page )){
+    		if(ceil($allNum/$common_limit)< $page ){
     			$this->redirect(url('index/index/errors'));
     		}
     	}
@@ -166,9 +175,16 @@ class Addarticle extends Controller {
 
 
     	// 最新排行
-    	$articleNew 	=	Model('Article')->where('status',1)->order('id desc')->limit($common_limit)->page($page)->select();
+    	$articleNew 	=	Model('Article')
+                                ->where('status',1)
+                                ->order('id desc')
+                                ->limit($common_limit)
+                                ->page($page)
+                                ->select();
     	// 分页
-    	$pageination	=	Model('Article')->where('status',1)->paginate($common_limit);
+    	$pageination	=	Model('Article')
+                                ->where('status',1)
+                                ->paginate($common_limit);
 
     	$this->assign('articleNew',$articleNew);
     	$this->assign('pageination',$pageination);
@@ -196,7 +212,7 @@ class Addarticle extends Controller {
 		// 判断是否显示
 		if($message['status'] == 0){
 			// 判断session
-			if(session::get('administer') != 1){
+			if(Session::get('administer') != 1 ){
 				$this->redirect(url('index/index/errors'));
 			}
 		}
@@ -218,7 +234,7 @@ class Addarticle extends Controller {
 
     	$cacheTime			=	$setting['cache_time'];
 
-    	$webTitle 			=	$message['title']."-".$title;
+    	$webTitle 			=	$message['title']."-文章资讯-".$title;
     	$webDescription		=	$message['description'];
     	$webKeywords		=	$message['keywords'];
 
@@ -247,10 +263,13 @@ class Addarticle extends Controller {
     					->select();
 
     	// 随机推荐5篇
-    	$suiji  		=	Model('Article')->order('rand()')->limit(5)->select();
+    	$suiji  		=	Model('Article')->where('status',1)->order('rand()')->limit(5)->select();
 
     	// 获取最新评论5个
-    	$common 		=	Model('Common')->where('post_id',$id)->order('id desc')->select();
+    	$common 		=	Model('Common')
+                                ->where(['post_id'=>$id,'status'=>1])
+                                ->order('id desc')
+                                ->select();
 
 
 

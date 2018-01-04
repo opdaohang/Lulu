@@ -34,7 +34,9 @@
 				<textarea name="description" id="description" class="form-control"></textarea>
 			</div>
 			<div class="form-group">
+
 				<input type="submit" value="提交" class="btn btn-success" id="btns">
+				
 			</div>
 		</form>
 	</div>
@@ -52,13 +54,11 @@
 	var editor2 = new E('#content')
 	editor2.create()
 
-// 获取cookie
 $(function(){
-	uCookie = getCookie("username");
-	if(uCookie){
-		$('#username').val(uCookie);
-		$('#btns').attr('disabled',"true").val("一天只能投稿一篇");
+	if(getCookie('add') == 'no'){
+		$('input').attr("disabled",true).val("不能重复投稿");
 	}
+	console.log(getCookie('add'));
 })
 // 文章
 function article(e){
@@ -115,6 +115,9 @@ function article(e){
 				tips.html('添加失败').fadeIn(500);
 			}
 			setTimeout(tips.fadeOut(1000),3000);
+			setTimeout(function(){
+				window.location.href = window.location.href;
+			},3200);
 		}
 	});
 

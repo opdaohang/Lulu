@@ -1,0 +1,41 @@
+{include file="../template/admin/common/header.html"}
+<div class="container">
+	<ul class="list-group">
+		<li class="list-group-item active del-btn">
+			<a href="">
+				查看未审核评论
+			</a>
+		</li>
+		{volist name="commentArr" id="commentArr"}
+			<li class="list-group-item">
+				{$commentArr.content} - 来自：文章：{$commentArr.post_id}
+				<span class="btn btn-sm btn-danger del-btn" style="float: right;">
+					<a href="javascript:" onclick="getFw('{:url("admin/comment/del",["id"=>$commentArr.id])}','删除')">
+						删除
+					</a>
+				</span>
+				<!-- 审核 -->
+				{if $commentArr.status eq 0}
+				<span class="btn btn-sm btn-warning del-btn" style="float: right;margin-right: 10px;">
+					<a href="javascript:" onclick="getFw('{:url("admin/comment/status",["id"=>$commentArr.id])}','更改状态')">
+						审核
+					</a>
+				</span>
+				{else /}
+				<span class="btn btn-sm btn-warning del-btn" style="float: right;margin-right: 10px;">
+					<a href="javascript:" onclick="getFw('{:url("admin/comment/status",["id"=>$commentArr.id])}','更改状态')">
+						取消审核
+					</a>
+				</span>
+				{/if}
+				<span class="btn btn-sm btn-success del-btn" style="float: right;margin-right: 10px;">
+					<a href="javascript:" onclick="window.open('http://{$_SERVER["HTTP_HOST"]}{:url("index/addarticle/look",["id"=>$commentArr.post_id])}')">
+						查看评论
+					</a>
+				</span>
+			</li>
+		{/volist}
+	</ul>
+	{$pageination->render()}
+</div>
+{include file="../template/admin/common/footer.html"}

@@ -57,7 +57,7 @@ Route::any('/seo','index/seo/index');
 
 // 文章路由
 Route::rule('/addarticle','index/addarticle/index');
-Route::rule('/addarticles','index/addarticle/adds');
+Route::any('/addarticles','index/addarticle/adds');
 
 // 文章列表
 Route::rule('article','index/addarticle/lists');

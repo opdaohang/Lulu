@@ -2,7 +2,9 @@
 <div class="container">
 	<ul class="list-group">
 		<li class="list-group-item active">
-			所有文章
+			<a href="{:url('admin/article/nogo')}" class="btn del-btn">
+				查看所有未审核
+			</a>
 			<span class="btn btn-sm btn-warning" style="float: right;" onclick="insert()">添加</span>
 		</li>
 		{volist name="articleArr" id="articleArr"}
@@ -14,9 +16,15 @@
 					删除
 				</a>
 			</span>
+			<!-- 编辑 -->
+			<span class="btn btn-sm btn-success del-btn" style="float: right;margin-right: 10px;">
+				<a href="{:url('admin/article/edit',['id'=>$articleArr.id])}">
+					编辑
+				</a>
+			</span>
 			<!-- 预览 -->
 			<span class="btn btn-sm btn-success del-btn" style="float: right;margin-right: 10px;">
-				<a href="javascript:" onclick="getFw('{:url("admin/article/look",["id"=>$articleArr.id])}')">
+				<a href="javascript:" onclick="window.open('http://{$_SERVER["HTTP_HOST"]}{:url("index/addarticle/look",["id"=>$articleArr.id])}')">
 					预览
 				</a>
 			</span>
@@ -45,7 +53,7 @@
 				<label>文章来源(超链接)：</label>
 				<input type="text" name="source" class="form-control" id="source">&nbsp;&nbsp;
 				<label>作者名称：</label>
-				<input type="text" name="username" class="form-control" id="username">&nbsp;&nbsp;
+				<input type="text" name="username" class="form-control" id="username" value="帅阿猪">&nbsp;&nbsp;
 				<label>联系方式(邮箱电话或者qq)：</label>
 				<input type="text" name="lianxi" class="form-control" id="lianxi">&nbsp;&nbsp;
 			</div><br>

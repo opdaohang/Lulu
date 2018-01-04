@@ -1,0 +1,99 @@
+{include file="../template/admin/common/header.html"}
+<div class="container">
+	<h3>{$message.title} - <button class="btn btn-default" onclick="history.go(-1)">取消编辑</button></h3>
+	<form action="{:url('admin/article/update')}" method="post" onsubmit="return edit($(this));">
+		<div class="form-group">
+			<input type="hidden" name="id" value="{$message.id}">
+			<label>是否显示</label>
+			<select class="form-control" name="status">
+				{if $message.status eq 0}
+				<option value="0">不显示</option>
+				<option value="1">显示</option>
+				{else /}
+				<option value="1">显示</option>
+				<option value="0">不显示</option>
+				{/if}
+			</select>
+		</div>
+		<div class="form-group">
+			<label>标题</label>
+			<input type="text" name="title" class="form-control" value="{$message.title}">
+		</div>
+		<div class="form-group">
+			<label>关键词</label>
+			<input type="text" name="keywords" class="form-control" value="{$message.keywords}">
+		</div>
+		<div class="form-group">
+			<label>描述</label>
+			<textarea name="descritpion" class="form-control">{$message.description}</textarea>
+		</div>
+		<div class="form-group">
+			<label>内容</label>
+			<div id="content">{$message.content}</div>
+		</div>
+		<div class="form-group">
+			<label>作者</label>
+			<input type="text" name="username" class="form-control" value="{$message.username}">
+		</div>
+		<div class="form-group">
+			<label>联系方式</label>
+			<input type="text" name="lianxi" class="form-control" value="{$message.lianxi}">
+		</div>
+		<div class="form-group">
+			<label>文章来源</label>
+			<input type="text" name="source" class="form-control" value="{$message.source}">
+		</div>
+		<div class="form-group">
+			<label>浏览量</label>
+			<input type="text" name="view" class="form-control" value="{$message.view}">
+		</div>
+		<div class="form-group">
+			<input type="submit" value="提交" class="btn btn-success">
+		</div>
+	</form>
+</div>
+<script src="http://{$_SERVER['HTTP_HOST']}/static/index/js/wangEditor.min.js"></script>
+<script type="text/javascript">
+	var E = window.wangEditor
+	var editor2 = new E('#content');
+	editor2.create();
+
+	function edit(e){
+		var url = e.attr('action');
+		// 获取值
+		var id           = $(document).find("input[name='id']").val();
+		var title		 = $(document).find("input[name='title']").val();
+		var description  = $(document).find("textarea[name='descritpion']").val();
+		var keywords     = $(document).find("input[name='keywords']").val();
+		var status		 = $(document).find("select[name='status']").val();
+		var content      = editor2.txt.html();
+		var source		 = $(document).find("input[name='source']").val();
+		var username	 = $(document).find("input[name='username']").val();
+		var lianxi       = $(document).find("input[name='lianxi']").val();
+		var view		 = $(document).find("input[name='view']").val();
+
+		// console.log(description);
+		// return false;
+		// 开始ajax请求
+		$.ajax({
+			url:url,
+			data:{'id':id,'title':title,'keywords':keywords,'description':description,'status':status,'content':content,'source':source,'username':username,'lianxi':lianxi,'view':view},
+			type:'post',
+			success:function(msg){
+				if(msg['code'] == 1){
+					window.location.href = '{:url("admin/article/index")}';
+				}else{
+					$(".jbxx-status").html('更新失败').show();
+					setTimeOut(function(){
+						$(".jbxx-status").hide();
+					},3000);
+				}
+			}
+		});
+		
+
+		return false;
+	}
+</script>
+
+{include file="../template/admin/common/footer.html"}

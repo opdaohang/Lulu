@@ -33,6 +33,15 @@ class Index extends Controller{
 		// seo查询词个数
 		$seo 		=	Model('Seo')->count();
 
+		// 获取所有文章
+		$article	=	Model('Article')->count();
+
+		// 已经审核文章数量
+		$articleYes	=	Model('Article')->where('status',1)->count();
+
+		// 未审核文章数量
+		$articleNo	=	Model('Article')->where('status',0)->count();
+
 		// 赋值
 		$this->assign('already',$already);
 		$this->assign('wait',$wait);
@@ -41,6 +50,9 @@ class Index extends Controller{
 		$this->assign('menu',$menu);
 		$this->assign('search',$search);
 		$this->assign('seo',$seo);
+		$this->assign('article',$article);
+		$this->assign('articleYes',$articleYes);
+		$this->assign('articleNo',$articleNo);
 		return view();
 	}
 	// 退出
