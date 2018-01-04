@@ -1,1 +1,75 @@
+.container-fluid {
+	width: 100%;
+	padding-left: 0px;
+	padding-right: 0px;
+}
+/*login*/
+.login-bg{
+	display: block;
+	height: 50%;
+}
+/*admin*/
+.admin-nav {
+	height: 50px;
+	line-height: 50px;
+	background: #04859d;
+	color:#fff;
+}
+.admin-nav a {
+	color: #fff;
+	text-decoration: none;
+}
+.admin-nav-list {
+	float: right;
+}
+.admin-nav-list ul {
+	list-style: none;
+	margin-right: 10px;
+}
+.admin-nav-list li {
+	display: inline-block;
+	padding-left: 5px;
+	padding-right: 5px;
+}
 
+/*admin-index*/
+.admin-index-title {
+	height: 35px;
+	line-height: 35px;
+	border-left:5px solid #04859d;
+	padding-left: 10px;
+	font-weight: bold;
+}
+.admin-index-content {
+	margin-top:10px;
+	font-size: 16px;
+}
+.del-btn,.del-btn a {
+	color:#fff;
+	text-decoration: none;
+}
+.jbxx-status {
+	display: none;
+	position: fixed;
+	top:30%;
+	left: 50%;
+	z-index: 99;
+}
+.footer-go-top {
+	display: block;
+	height: 35px;
+	width: 35px;
+	background-color: #000;
+	border-radius: 10px;
+	color: #fff;
+	font-size: 18px;
+	line-height: 35px;
+	text-align: center;
+	opacity: 0.5;
+	position: fixed;
+	bottom: 20px;
+	right: 20px;
+}
+.footer-go-top:hover{
+	cursor: pointer;
+}
