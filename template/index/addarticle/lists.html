@@ -10,7 +10,7 @@
 			{volist name="articleNew" id="articleNew"}
 			<li class="list-group-item">
 				<div class="article-list-title">
-					<a href="{:url('index/addarticle/look',['id'=>$articleNew.id])}">
+					<a href="{:url('index/addarticle/look',['id'=>$articleNew.id])}" target="_blank" title="{$articleNew.title}">
 						{$articleNew.title}
 					</a>
 				</div>

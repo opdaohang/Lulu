@@ -10,7 +10,7 @@
 			</div>
 			<!-- 来源信息 -->
 			<div class="article-info">
-				文章来源：<a href="{$message.source}" target="_blank" rel="nofollow">文章来源</a>&nbsp;&nbsp;
+				文章来源：<a href="{$message.source}" target="_blank" rel="nofollow" title="文章来源">文章来源</a>&nbsp;&nbsp;
 				分类：<a href="{:url('index/addarticle/lists')}" target="_blank" title="文章资讯">文章资讯</a>&nbsp;&nbsp;
 				作者：{$message.username}&nbsp;&nbsp;
 				提交时间：{$message.time}&nbsp;&nbsp;
@@ -64,7 +64,7 @@
 						{if $common.userurl eq ''}
 						<a href="#common-{$common.id}" title="{$common.username}的评论">
 						{else /}
-						<a href="{$common.userurl}" target="_blank" rel="nofollow">
+						<a href="{$common.userurl}" target="_blank" rel="nofollow" title="{$common.username}的评论">
 						{/if}
 							{$common.username}说：
 						</a>
