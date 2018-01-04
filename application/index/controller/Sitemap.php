@@ -46,4 +46,25 @@ class Sitemap extends Controller{
         
         return view();
     }
+    public function seo(){
+        header('content-type:text/xml');
+
+        $seoArr         =   Model('Seo')->order('id asc')->limit(500000)->select();
+
+        $this->assign('seoArr',$seoArr);
+
+        return view();
+    }
+    public function article(){
+        header('content-type:text/xml');
+
+        $articleArr     =   Model('Article')->order('id desc')->limit(50000)->select();
+
+        $this->assign('articleArr',$articleArr);
+
+        return view();
+    }
+    public function _empty(){
+        $this->redirect(url('index/index/errors'));
+    }
 }

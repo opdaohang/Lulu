@@ -43,6 +43,8 @@ Route::any('/sitemap','index/sitemap/index','[]',['ext'=>'xml','denyext'=>'']);
 Route::any('/sitemap_list','index/sitemap/lists','[]',['ext'=>'xml','denyext'=>'']);
 Route::any('/sitemap_siteinfo','index/sitemap/siteinfo','[]',['ext'=>'xml','denyext'=>'']);
 Route::any('/sitemap_search','index/sitemap/search','[]',['ext'=>'xml','denyext'=>'']);
+Route::any('/sitemap_seo','index/sitemap/seo','[]',['ext'=>'xml']);
+Route::any('/sitemap_article','index/sitemap/article','[]',['ext'=>'xml']);
 
 
 // sitemap end

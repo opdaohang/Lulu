@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    {volist name='seoArr' id='seoArr'}
+    <url>
+    <loc>http://{$_SERVER['HTTP_HOST']}{:url('index/seo/index')}?url={$seoArr.url}</loc>
+    </url>
+{/volist}
+</urlset>
