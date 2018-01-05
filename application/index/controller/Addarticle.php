@@ -115,12 +115,15 @@ class Addarticle extends Controller {
     	$webDescription	=	"";
     	$webKeywords	=	"";
     	$common_limit 		=	$setting['common_limit_num'];
+        
+        // 总数量
+        $allNum =   Model('Article')->where('status',1)->count();
+
     	// 重新赋值标题
     	if($page >= 2){
     		$webTitle 		=	"文章资讯-第{$page}页-".$title;
     		// 判断是否恶意输入页数
-    		// 总数量
-    		$allNum	=	Model('Article')->where('status',1)->count();
+
     		if(ceil($allNum/$common_limit)< $page ){
     			$this->redirect(url('index/index/errors'));
     		}
@@ -166,11 +169,14 @@ class Addarticle extends Controller {
     	// 赋值所有分类
     	$this->assign('cate',$cate);
 
-    	// 
+    	// 赋值侧边栏最新
     	$this->assign('new',$new);
 
     	// 赋值统计代码
     	$this->assign('tongji_code',$tongji_code);
+
+        // 赋值总数量
+        $this->assign('allNum',$allNum);
 
     	// ----------------------------------
 
