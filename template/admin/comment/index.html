@@ -8,7 +8,7 @@
 		</li>
 		{volist name="commentArr" id="commentArr"}
 			<li class="list-group-item">
-				{$commentArr.content} - 来自：文章：{$commentArr.post_id}
+				{$commentArr.content} - 来自：文章：{$commentArr.post_id}-[{$commentArr.ip}]
 				<span class="btn btn-sm btn-danger del-btn" style="float: right;">
 					<a href="javascript:" onclick="getFw('{:url("admin/comment/del",["id"=>$commentArr.id])}','删除')">
 						删除
