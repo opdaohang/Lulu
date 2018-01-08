@@ -67,7 +67,7 @@ Route::rule('article','index/addarticle/lists');
 Route::get('arcicle/:id','index/addarticle/look',['ext'=>'html']);
 
 // 评论路由
-Route::rule('/artocle/common','index/addarticle/common');
+Route::rule('/article_common','index/addarticle/common');
 
 // 批量注册get
 Route::rule([

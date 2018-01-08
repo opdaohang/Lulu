@@ -1,5 +1,12 @@
 {include file="../template/admin/common/header.html"}
 <div class="container">
+	<!-- 搜索 -->
+	<div class="search">
+		<form action="{:url('admin/searchs/article')}" method="get" class="form-inline" style="text-align: center;">
+			<input type="text" name="search" class="form-control">
+			<input type="submit" value="搜索" class="btn btn-success">
+		</form>
+	</div><br>
 	<ul class="list-group">
 		<li class="list-group-item active">
 			<a href="{:url('admin/article/nogo')}" class="btn del-btn">
@@ -125,6 +132,14 @@ function article(e){
 		setTimeout(tips.fadeOut(1000),3000);
 		return false;
 	}
+
+	// 设置为禁止点击
+	$('#btns').css('disabled',true);
+
+	// 取消点击
+	setTimeout(function(){
+		$('#btns').css('disabled',false);
+	},2000);
 
 	// 发送post
 	$.ajax({

@@ -11,8 +11,7 @@ class Siteinfo extends Controller{
 		if(!input('?id')){
 			$this->redirect(url('index/index/errors'));
 		}else{
-			$id = input('id');
-            $id = htmlspecialchars($id);
+            $id = htmlspecialchars(input('id'));
 		}
 
 		// 根据id获取信息
@@ -28,32 +27,31 @@ class Siteinfo extends Controller{
 		}
 
 		// 获取基本信息
-		$setting = Model('Setting')->get(1)->toArray();
+		$setting = getSetting();
 
     	// 获取基本信息
-    	$title			    = 	$setting['web_title'];
-    	$webUrl			    =	$setting['web_url'];
-        $cacheTime          =   $setting['cache_time'];
-        $pic_api            =   $setting['common_pic_api'];
-        $likeNum            =   $setting['siteinfo_like_num'];
-        $sidebarFastType    =   $setting['siteinfo_fast_type'];
-        $sidebarFastNum     =   $setting['siteinfo_fast_num'];
-        $tongji_code        =   $setting['tongji_code'];
+    	$webTitle			    = 	$setting['web_title'];
+    	$webUrl			        =	$setting['web_url'];
+        $cacheTime              =   $setting['cache_time'];
+        $pic_api                =   $setting['common_pic_api'];
+        $likeNum                =   $setting['siteinfo_like_num'];
+        $sidebarFastType        =   $setting['siteinfo_fast_type'];
+        $sidebarFastNum         =   $setting['siteinfo_fast_num'];
+        $tongji_code            =   $setting['tongji_code'];
 
-    	// 改变基本信息
+    	// 去除url的https://
     	if(preg_match("/https{0,1}:\/\//",$urlArr['url'])){
     	    $titleUrl     =    preg_replace("/https{0,1}:\/\//",'',$urlArr['url']);
     	}
-    	$webTitle      	    =	$urlArr['title'].'-'.$titleUrl.'-'.$title;
-    	$webKeywords        =	$urlArr['keywords'];
-    	$webDescription     =	$urlArr['description'];
+    	
+        // 设置meta
+        $meta                   =   getMeta('siteinfo','',$id,'');
 
     	
 
     	// 获取菜单
     	$menu	=	Model('Menu')
     					->order('top asc')
-    					// ->cache('menu',$cacheTime)
     					->select();
 
     	// 根据cate id获取分类目录
@@ -65,8 +63,8 @@ class Siteinfo extends Controller{
     					->where('status',1)
     					->limit($likeNum)
     					->order('rand()')
-    					// ->cache('like',$cacheTime)
     					->select();
+
 
     	// 快速审核 ** 根据类型来获取
         switch ($sidebarFastType) {
@@ -106,11 +104,10 @@ class Siteinfo extends Controller{
     	
 
     	// 赋值基本信息
-    	$this->assign('title',$title);
     	$this->assign('webTitle',$webTitle);
-    	$this->assign('webKeywords',$webKeywords);
-    	$this->assign('webDescription',$webDescription);
     	$this->assign('webUrl',$webUrl);
+        $this->assign('meta',$meta);
+        $this->assign('cateName',$cateName);
 
 
     	// 赋值url信息

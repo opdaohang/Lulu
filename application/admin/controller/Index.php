@@ -42,6 +42,12 @@ class Index extends Controller{
 		// 未审核文章数量
 		$articleNo	=	Model('Article')->where('status',0)->count();
 
+		// 总评论个数
+		$comment	=	Model('Common')->count();
+
+		// 未审核评论数
+		$commentNo	=	Model('Common')->where('status',0)->count();
+
 		// 赋值
 		$this->assign('already',$already);
 		$this->assign('wait',$wait);
@@ -53,6 +59,8 @@ class Index extends Controller{
 		$this->assign('article',$article);
 		$this->assign('articleYes',$articleYes);
 		$this->assign('articleNo',$articleNo);
+		$this->assign('comment',$comment);
+		$this->assign('commentNo',$commentNo);
 		return view();
 	}
 	// 退出

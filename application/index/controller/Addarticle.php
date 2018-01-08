@@ -10,18 +10,19 @@ use think\Request;
 class Addarticle extends Controller {
 	public function index(){
 		// 获取基本信息
-		$setting = Model('Setting')->get(1)->toArray();
+		$setting = getSetting();
 
-    	// 赋值网站标题 关键词等
-    	$title			= 	$setting['web_title'];
+        // 获取网站标题
+        $webTitle       =   $setting['web_title'];
+        // 获取网站地址
     	$webUrl			=	$setting['web_url'];
+        // 获取统计代码
     	$tongji_code	=	$setting['tongji_code'];
-
+        // 获取缓存时间
     	$cacheTime		=	$setting['cache_time'];
 
-    	$webTitle 		=	"文章投稿-".$title;
-    	$webDescription	=	"";
-    	$webKeywords	=	"";
+        // 设置meta
+        $meta           =   getMeta('addArticle','','','');
 
     	// 获取菜单
     	$menu	=	Model('Menu')
@@ -36,10 +37,8 @@ class Addarticle extends Controller {
         
 
     	// 赋值网站基本信息
-    	$this->assign('title',$title);
     	$this->assign('webTitle',$webTitle);
-    	$this->assign('webKeywords',$webKeywords);
-    	$this->assign('webDescription',$webDescription);
+        $this->assign('meta',$meta);
     	$this->assign('webUrl',$webUrl);
 
     	// 赋值菜单
@@ -94,48 +93,42 @@ class Addarticle extends Controller {
 	// list
 	public function lists(){
 		// 获取基本信息
-		$setting = Model('Setting')->get(1)->toArray();
+		$setting = getSetting();
 
 		// 判断page
 		if(!input('page')){
 			$page = 1;
 		}else{
-			$page = input('page');
-			$page = htmlspecialchars($page);
+			$page = htmlspecialchars(input('page'));
 		}
 
     	// 赋值网站标题 关键词等
-    	$title			= 	$setting['web_title'];
-    	$webUrl			=	$setting['web_url'];
-    	$tongji_code	=	$setting['tongji_code'];
+    	$webTitle			= 	$setting['web_title'];
+    	$webUrl			    =	$setting['web_url'];
+    	$tongji_code	    =	$setting['tongji_code'];
+        $common_limit       =   $setting['common_limit_num'];
+    	$cacheTime		    =	$setting['cache_time'];
+        // 赋值名站推荐展示多少数量
+        $mztjShowNum        =   $setting['index_mztj_num'];
+        // 赋值首页随机展示多少数量
+        $suijiShowNum       =   $setting['index_suiji_num'];
+        // 赋值最新加入展示多少数量
+        $newShowNum         =   $setting['index_new_num'];
 
-    	$cacheTime		=	$setting['cache_time'];
 
-    	$webTitle 		=	"文章资讯-".$title;
-    	$webDescription	=	"";
-    	$webKeywords	=	"";
-    	$common_limit 		=	$setting['common_limit_num'];
+        // 获取meta
+        $meta               =   getMeta('articleList',$page,'','');
+    	
+        // 总数量 
+        $allNum	=	Model('Article')->where('status',1)->count();
         
-        // 总数量
-        $allNum =   Model('Article')->where('status',1)->count();
-
-    	// 重新赋值标题
+    	// 判断是否恶意输入页数
     	if($page >= 2){
-    		$webTitle 		=	"文章资讯-第{$page}页-".$title;
     		// 判断是否恶意输入页数
-
     		if(ceil($allNum/$common_limit)< $page ){
     			$this->redirect(url('index/index/errors'));
     		}
     	}
-
-    	// 赋值名站推荐展示多少数量
-    	$mztjShowNum	    =	$setting['index_mztj_num'];
-    	// 赋值首页随机展示多少数量
-    	$suijiShowNum	    =	$setting['index_suiji_num'];
-    	// 赋值最新加入展示多少数量
-    	$newShowNum		    =	$setting['index_new_num'];
-
 
 
     	// 获取菜单
@@ -157,11 +150,9 @@ class Addarticle extends Controller {
 
 
     	// 赋值网站基本信息
-    	$this->assign('title',$title);
     	$this->assign('webTitle',$webTitle);
-    	$this->assign('webKeywords',$webKeywords);
-    	$this->assign('webDescription',$webDescription);
     	$this->assign('webUrl',$webUrl);
+        $this->assign('meta',$meta);
 
     	// 赋值菜单
     	$this->assign('menu',$menu);
@@ -169,13 +160,13 @@ class Addarticle extends Controller {
     	// 赋值所有分类
     	$this->assign('cate',$cate);
 
-    	// 赋值侧边栏最新
+    	// 
     	$this->assign('new',$new);
 
     	// 赋值统计代码
     	$this->assign('tongji_code',$tongji_code);
-
-        // 赋值总数量
+    	
+        // 	赋值总数量
         $this->assign('allNum',$allNum);
 
     	// ----------------------------------
@@ -205,8 +196,10 @@ class Addarticle extends Controller {
 
 		if(!$id){
 			$this->redirect(url('index/index/errors'));
-		}
-		$id 			 	=	htmlspecialchars($id);
+		}else{
+            $id             =   htmlspecialchars($id);
+        }
+		
 
 		// 根据id获取
 		$message 			=	Model('Article')->get($id);
@@ -232,18 +225,15 @@ class Addarticle extends Controller {
 		// ——————————————————————————————————————————
 
 		// 获取基本信息
-		$setting = Model('Setting')->get(1)->toArray();
+		$setting            =   getSetting();
 
     	// 赋值网站标题 关键词等
-    	$title				= 	$setting['web_title'];
+    	$webTitle			= 	$setting['web_title'];
     	$webUrl				=	$setting['web_url'];
     	$tongji_code		=	$setting['tongji_code'];
 
+        // 缓存时间
     	$cacheTime			=	$setting['cache_time'];
-
-    	$webTitle 			=	$message['title']."-文章资讯-".$title;
-    	$webDescription		=	$message['description'];
-    	$webKeywords		=	$message['keywords'];
 
     	// 赋值名站推荐展示多少数量
     	$mztjShowNum	    =	$setting['index_mztj_num'];
@@ -251,6 +241,9 @@ class Addarticle extends Controller {
     	$suijiShowNum	    =	$setting['index_suiji_num'];
     	// 赋值最新加入展示多少数量
     	$newShowNum		    =	$setting['index_new_num'];
+
+        // 获取meta
+        $meta               =   getMeta('article','',$id,'');
 
     	// 获取菜单
     	$menu	=	Model('Menu')
@@ -269,8 +262,8 @@ class Addarticle extends Controller {
     					->limit($newShowNum)
     					->select();
 
-    	// 随机推荐5篇
-    	$suiji  		=	Model('Article')->where('status',1)->order('rand()')->limit(5)->select();
+    	// 随机推荐10篇
+    	$suiji  		=	Model('Article')->where('status',1)->order('rand()')->limit(10)->select();
 
     	// 获取最新评论5个
     	$common 		=	Model('Common')
@@ -281,11 +274,9 @@ class Addarticle extends Controller {
 
 
     	// 赋值网站基本信息
-    	$this->assign('title',$title);
     	$this->assign('webTitle',$webTitle);
-    	$this->assign('webKeywords',$webKeywords);
-    	$this->assign('webDescription',$webDescription);
     	$this->assign('webUrl',$webUrl);
+        $this->assign('meta',$meta);
 
     	// 赋值菜单
     	$this->assign('menu',$menu);
@@ -319,13 +310,13 @@ class Addarticle extends Controller {
 		if(!$data['content']){
 			$this->error('评论失败');
 		}
-        dump($data['yzm']);
+
         // 验证验证码
         if(!captcha_check($data['yzm'])){
           //验证失败
             $this->error('验证码错误');
         };
-
+        
         // 删除验证码字段
         unset($data['yzm']);
 
@@ -348,7 +339,7 @@ class Addarticle extends Controller {
 		$time 			=	date('Y-m-d H:i:s');
 		$data['time']	=	$time;
 
-		$add 	=	Model('Common')->insert($data);
+		$add 	        =	Model('Common')->insert($data);
 		if($add){
 			// 设置cookie
 			$this->success('评论成功');
@@ -356,6 +347,64 @@ class Addarticle extends Controller {
 			$this->error('评论失败');
 		}
 	}
+    // 文章搜索
+    public function articlesearch(){
+
+        // 获取基本信息
+        $setting = Model('Setting')->get(1)->toArray();
+
+        $common_limit = $setting['common_limit_num'];
+
+        // 获取post
+        $data = input();
+
+
+
+        if(empty($data['wd'])){
+            $this->error('错误');
+        }else{
+            $wd = $data['wd'];
+            $wd = htmlspecialchars($wd);
+        }
+
+        // page
+
+        if(!input('page')){
+            $page = 1;
+        }else{
+            $page = input('page');
+            $page = htmlspecialchars($page);
+        }
+
+
+
+        // 开始搜索
+        $result = Model('Article')
+                        // ->where('status',1)
+                        ->whereOr('title','like',"%{$wd}%")
+                        ->whereOr('content','like',"%{$wd}%")
+                        // ->whereOr('status',1)
+                        ->order('id desc')
+                        ->limit($common_limit)
+                        ->page($page)
+                        ->select();
+
+        // 分页
+        $pageination = Model('Article')
+                        // ->where('status',1)
+                        ->whereOr('title','like',"%{$wd}%")
+                        ->whereOr('content','like',"%{$wd}%")
+                        ->paginate([
+                            'list_rows' => $common_limit,
+                            'query'     => ['wd'=>$wd]
+                        ]);
+
+        // 赋值
+        $this->assign('searchArr',$result);
+        $this->assign('pageination',$pageination);
+
+        return view();
+    }
 }
 
 

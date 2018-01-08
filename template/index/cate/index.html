@@ -3,7 +3,7 @@
 <div class="container">
 	<div class="cate-info">
 		
-		{include file="../template/index/common/indexsidebar.html"}
+		{include file="../template/index/common/sidebar.html"}
 		<!-- 列表list -->
 		<div class="col-md-9 cate-info-content">
 			<div class="index-cate-title">
@@ -18,7 +18,7 @@
 					<ul>
 						<li>
 							<span style="font-weight: bold;">
-								<a href="{:url('index/siteinfo/index',['id'=>$url.id])}" title="{$url.title}">
+								<a href="{:url('index/siteinfo/index',['id'=>$url.id])}" title="{$url.title}" target="_blank">
 									{$url.title}
 								</a>
 							</span>

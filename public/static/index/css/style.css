@@ -1,5 +1,5 @@
 /*
-
+ 
 */
 .common-nav {
 	height: 50px;
@@ -262,8 +262,9 @@
 	text-align: center;
 }
 .article-content {
-	min-height: 200px;
+	min-height: 120px;
 	padding-top: 10px;
+	padding-bottom: 10px;
 }
 /**/
 .article-common {
@@ -271,4 +272,12 @@
 }
 .commin-new {
 	margin-top:5px;
+}
+.goTop {
+	width: 40px;
+	height: 40px;
+	opacity:0.5;
+	position: fixed;
+	bottom: 50px;
+	right: 0;
 }

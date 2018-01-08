@@ -2,11 +2,22 @@
 <div class="container" style="margin-top:10px;">
 
 	<div class="col-md-12">
-		{include file="../template/index/common/indexsidebar.html"}
+		{include file="../template/index/common/sidebar.html"}
 		<div class="col-md-9">
 			<div class="index-cate-title">
 				最新文章 - (共{$allNum}篇)
+				<span class="btn btn-default" style="float: right;display: none;margin-left: 10px;" id="article-search-no">
+					取消搜索
+				</span>
+				<span class="btn btn-default" style="float: right;" id="article-search">搜索</span>
 			</div>
+			<li class="list-group-item" style="display: none;" id="article-search-li">
+				<form class="form-inline" style="text-align: center;" action="{:url('index/addarticle/articlesearch')}" method="post" id="article-search-form">
+					<input type="text" name="search" class="form-control" placeholder="搜索" id="article-search-input">
+					<input type="submit" value="搜索" class="btn btn-default" id="article-search-btn">
+				</form>
+			</li>
+			<div id="list-ajax">
 			{volist name="articleNew" id="articleNew"}
 			<li class="list-group-item">
 				<div class="article-list-title">
@@ -22,8 +33,10 @@
 					</span>
 				</div>
 			</li>
+
 			{/volist}
 			{$pageination->render()}
+			</div>
 		</div>
 	</div>
 </div>

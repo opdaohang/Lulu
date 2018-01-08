@@ -1,10 +1,6 @@
 {include file="../template/index/common/header.html"}
 
 <div class="container">
-	<!-- 广告 -->
-	<!-- <div class="siteinfo-ads">
-		<img src="http://{$_SERVER['HTTP_HOST']}/static/index/ad/siteinfo-top-ad.jpg" width="100%">
-	</div> -->
 	<!-- 展示网站信息 -->
 	<div class="siteinfo">
 		<div class="col-md-9 siteinfo-info">
@@ -27,8 +23,8 @@
 
 						</li>
 						<li>分类目录：
-							<a href="{$webUrl}" target="_blank" title="{$title}">
-								{$title}
+							<a href="{$webUrl}" target="_blank" title="{$webTitle}">
+								{$webTitle}
 							</a>
 							>
 							<a href="{:url('index/cate/index',['id'=>$cate.id])}" target="_blank" title="{$cate.title}">
@@ -59,7 +55,7 @@
 				</ul>
 			</div>
 		</div>
-		{include file="../template/index/common/sidebar.html"}
+		{include file="../template/index/common/siteinfoSidebar.html"}
 	</div>
 </div>
 {include file="../template/index/common/footer.html"}

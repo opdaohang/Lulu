@@ -6,9 +6,7 @@
 	<link rel="stylesheet" type="text/css" href="http://{$_SERVER['HTTP_HOST']}/static/index/css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="http://{$_SERVER['HTTP_HOST']}/static/index/css/style.css">
 	<link rel="stylesheet" type="text/css" href="http://{$_SERVER['HTTP_HOST']}/static/index/css/index-media.css">
-	<title>{$webTitle}</title>
-	<meta name="keywords" content="{$webKeywords}">
-	<meta name="description" content="{$webDescription}">
+	{$meta}
 	<link rel="icon" href="http://{$_SERVER['HTTP_HOST']}/favicon.ico" type="image/x-icon" />
     <link rel="shortcut icon" href="http://{$_SERVER['HTTP_HOST']}/favicon.ico" type="image/x-icon"/>
 </head>
@@ -17,7 +15,7 @@
 <div class="container-fluid common-nav">
 	<div class="container">
 		<div class="header common-logo">
-			<a href="{$webUrl}">{$title}</a>
+			<a href="{$webUrl}">{$webTitle}</a>
 		</div>
 		<div class="common-nav-list">
 			<ul>

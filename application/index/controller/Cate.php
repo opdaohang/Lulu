@@ -10,18 +10,15 @@ class Cate extends Controller{
 		if(!input('?id')){
 			$this->redirect(url('index/index/errors'));
 		}else{
-			$id = input('id');
-            $id = htmlspecialchars($id);
+            $id = htmlspecialchars(input('id'));
 		}
 
 		// 如果没有定义page  page为1
 		if(!input('?page')){
 			$page = 1;
 		}else{
-			$page =	input('page');
-            $page = htmlspecialchars($page);
-            // 入股页数超出限制
-            // 得到总数量
+            $page = htmlspecialchars(input('page'));
+            // 判断页数是否超出限制
             $zongNum = Model('Url')->where('cate',$id)->count();
             if(ceil($zongNum/10)<$page){
                 $this->redirect(url('index/index/errors'));
@@ -38,23 +35,18 @@ class Cate extends Controller{
 		}
 
 		// 获取基本信息
-		$setting = Model('Setting')->get(1)->toArray();
+		$setting = getSetting();
 
     	// 赋值基本参数
-    	$title			= 	$setting['web_title'];
+        $webTitle       =   $setting['web_title'];
     	$webUrl			=	$setting['web_url'];
         $newShowNum     =   $setting['index_new_num'];
         $listShowNum    =   $setting['common_limit_num'];
         $pic_api        =   $setting['common_pic_api'];
         $tongji_code    =   $setting['tongji_code'];
 
-    	// 改变赋值
-    	$webTitle  		=	$cateArr['title'].'-'.$title;
-        $webKeywords    =   '';
-    	$webDescription	=	'';
-    	if($page >= 2){
-    	    $webTitle  		=	$cateArr['title']."-第{$page}页-".$title;
-    	}
+    	// 设置meta
+        $meta           =   getMeta('cateList',$page,$id,'');
 
     	$cacheTime		=	$setting['cache_time'];
 
@@ -93,11 +85,9 @@ class Cate extends Controller{
         $allUrlNum     =   Model('Url')->where('cate',$id)->count();
 
     	// 赋值基本信息
-    	$this->assign('title',$title);
     	$this->assign('webTitle',$webTitle);
-    	$this->assign('webKeywords',$webKeywords);
-    	$this->assign('webDescription',$webDescription);
     	$this->assign('webUrl',$webUrl);
+        $this->assign('meta',$meta);
 
     	// 赋值菜单
     	$this->assign('menu',$menu);

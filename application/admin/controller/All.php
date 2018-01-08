@@ -20,7 +20,7 @@ class All extends Controller {
 		}
 
 		// 获取setting信息
-		$setting	=	Model('Setting')->where('id',1)->find()->toArray();
+		$setting	=	getSetting();
 
 		// 分页数量
 		$common_limit	=	$setting['admin_limit_num'];	
@@ -88,8 +88,10 @@ class All extends Controller {
 			$page 	=	input('page');
 		}
 		// 获取系统信息
-		$setting 	=	Model('Setting')->where('id',1)->find()->toArray();
+		$setting 	=	getSetting();
+
 		$common_limit	=	$setting['admin_limit_num'];
+		
 		// 查询
 		$nogoArr	=	Model('Url')
 		                    ->where('status',0)

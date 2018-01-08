@@ -7,18 +7,17 @@ use think\Model;
 class Addurl extends Controller{
 	public function index(){
 		// 获取基本信息
-		$setting = Model('Setting')->get(1)->toArray();
+		$setting = getSetting();
 
     	// 赋值网站标题 关键词等
-    	$title			= 	$setting['web_title'];
-    	$webUrl			=	$setting['web_url'];
-    	$tongji_code	=	$setting['tongji_code'];
+    	$webTitle			= 	$setting['web_title'];
+    	$webUrl				=	$setting['web_url'];
+    	$tongji_code		=	$setting['tongji_code'];
 
-    	$cacheTime		=	$setting['cache_time'];
+    	$cacheTime			=	$setting['cache_time'];
 
-    	$webTitle 		=	"网站提交-".$title;
-    	$webDescription	=	"";
-    	$webKeywords	=	"";
+    	// 设置meta
+    	$meta 				=	getMeta('addUrl','','','');
 
     	// 获取菜单
     	$menu	=	Model('Menu')
@@ -32,11 +31,9 @@ class Addurl extends Controller{
 
 
     	// 赋值网站基本信息
-    	$this->assign('title',$title);
     	$this->assign('webTitle',$webTitle);
-    	$this->assign('webKeywords',$webKeywords);
-    	$this->assign('webDescription',$webDescription);
     	$this->assign('webUrl',$webUrl);
+    	$this->assign('meta',$meta);
 
     	// 赋值菜单
     	$this->assign('menu',$menu);

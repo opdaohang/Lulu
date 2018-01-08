@@ -1,0 +1,21 @@
+{volist name="searchArr" id='searchArr'}
+<li class="list-group-item">
+				<div class="article-list-title">
+					{if $searchArr.status eq 1}
+					<a href="{:url('index/addarticle/look',['id'=>$searchArr.id])}" target="_blank" title="{$searchArr.title}">
+						{$searchArr.title}
+					</a>
+					{else /}
+					[未审核] - <del>{$searchArr.title}</del>
+					{/if}
+				</div>
+				<div class="article-list-description">{$searchArr.description}...</div>
+				<div class="article-list-info">
+					{$searchArr.time}
+					<span class="badge" style="float: right;">
+						{$searchArr.view}
+					</span>
+				</div>
+</li>
+{/volist}
+<div id="ajax-page"> {$pageination->render()}</div>

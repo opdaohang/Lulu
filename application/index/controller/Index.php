@@ -10,12 +10,10 @@ class Index extends Controller
     {
 
     	// 获取setting系统信息
-    	$setting = Model('Setting')->get(1)->toArray();
+    	$setting = getSetting();
 
-    	// 赋值网站标题 关键词等
+    	// 设置基本信息
     	$webTitle			= 	$setting['web_title'];
-    	$webKeywords		=	$setting['web_keywords'];
-    	$webDescription	    =	$setting['web_description'];
     	$webUrl			    =	$setting['web_url'];
         $tongji_code        =   $setting['tongji_code'];
 
@@ -28,6 +26,9 @@ class Index extends Controller
 
     	// 赋值全站缓存时间
     	$cacheTime		    =	$setting['cache_time'];
+
+        // 设置meta
+        $meta               =   getMeta('index','','','');
 
 
     	// 获取名站推荐
@@ -81,12 +82,9 @@ class Index extends Controller
 
 
     	// 赋值基本信息
-    	$this->assign('title',$webTitle);
     	$this->assign('webTitle',$webTitle);
-    	$this->assign('webKeywords',$webKeywords);
-    	$this->assign('webDescription',$webDescription);
     	$this->assign('webUrl',$webUrl);
-
+        $this->assign('meta',$meta);
 
  
     	// 赋值名站推荐

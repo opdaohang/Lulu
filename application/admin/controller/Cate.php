@@ -21,17 +21,17 @@ class Cate extends Controller {
 		}
 
 		// 获取系统参数
-		$setting 	=	Model('Setting')->get(1)->toArray();
+		$setting 		=	getSetting();
 
 		// 获取limit
 		$common_limit	=	$setting['admin_limit_num'];
 
 		// 根据page获取列表
-		$cateList = Model('Cate')
-						->order('id desc')
-						->limit($common_limit)
-						->page($page)
-						->select();
+		$cateList 		= 	Model('Cate')
+								->order('id desc')
+								->limit($common_limit)
+								->page($page)
+								->select();
 
 		// 分页
 		$pageination	=	Model('Cate')
@@ -61,9 +61,6 @@ class Cate extends Controller {
 		}else{
 			$data = input();
 		}
-
-
-
 
 		// 去掉自带变量
 		unset($data['/admin/cate/cateinsert']);

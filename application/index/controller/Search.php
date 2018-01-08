@@ -6,9 +6,8 @@ use think\Model;
 
 class Search extends Controller{
 	public function index(){
-		$wd = input('wd');
-		// 过滤
-		$wd =	htmlspecialchars($wd);
+		// 过滤并获取搜索词语
+		$wd =	htmlspecialchars(input('wd'));
 		if(empty($wd) || !$wd){
 			$this->redirect(url('index/index/errors'));
 		}
@@ -21,7 +20,7 @@ class Search extends Controller{
 		}
 
 		// 获取系统变量
-		$setting	=	Model('Setting')->get(1)->toArray();
+		$setting	=	getSetting();
 
 		// 获取分页数量
 		$common_limit	=	$setting['common_limit_num'];
@@ -29,19 +28,15 @@ class Search extends Controller{
 		$pic_api		=	$setting['common_pic_api'];
 		// 获取统计代码
 		$tongji_code	=	$setting['tongji_code'];
+		// 站点标题
+		$webTitle 		=	$setting['web_title'];
+		// 站点url
 		$webUrl			=	$setting['web_url'];
+		// 获取最新站点展示数量
 		$newShowNum		=	$setting['index_new_num'];
 
-		// 赋值基本信息
-		$title		=	$setting['web_title'];
-
-		$webTitle 	=	$wd.'的搜索结果-'.$title;
-		if($page >= 2){
-			$webTitle 	=	$webTitle.'-第{$page}页';
-
-		}
-		$webDescription		=	'';
-		$webKkeywords		=	'';
+		// 设置meta
+		$meta			=	getMeta('siteinfoSearch',$page,'',$wd);
 
 		// 菜单
 		$menu	=	Model('Menu')
@@ -96,6 +91,7 @@ class Search extends Controller{
 				$searchZeng		=	Model('Search')->where('wd',$wd)->setInc('num');
 			}
 		}
+
 		if($page > 1){
 			// 判断页数是否超出限制
 			if($searchNum != 0){
@@ -105,14 +101,12 @@ class Search extends Controller{
 			}
 		}
 
-
-		$this->assign('title',$title);
+		// 赋值基本信息
 		$this->assign('webTitle',$webTitle);
-		$this->assign('webKeywords',$webKkeywords);
-		$this->assign('webDescription',$webDescription);
 		$this->assign('webUrl',$webUrl);
 		$this->assign('pic_api',$pic_api);
 		$this->assign('tongji_code',$tongji_code);
+		$this->assign('meta',$meta);
 
 		// 
 		$this->assign('searchList',$searchUrl);
@@ -129,33 +123,30 @@ class Search extends Controller{
 	}
 	public function views(){
 		// 获取系统变量
-		$setting	=	Model('Setting')->get(1)->toArray();
+		$setting			=	getSetting();
 
 		// 获取分页数量
-		$common_limit	=	$setting['common_limit_num'];
+		$common_limit		=	$setting['common_limit_num'];
 		// 获取图片接口
-		$pic_api		=	$setting['common_pic_api'];
+		$pic_api			=	$setting['common_pic_api'];
 		// 获取统计代码
-		$tongji_code	=	$setting['tongji_code'];
-		$webUrl			=	$setting['web_url'];
-		$newShowNum		=	$setting['index_new_num'];
+		$tongji_code		=	$setting['tongji_code'];
+		$webTitle 			=	$setting['web_title'];
+		$webUrl				=	$setting['web_url'];
+		$newShowNum			=	$setting['index_new_num'];
+		$searchShowType		=	$setting['search_show_type'];
+    	$searchShowNum		=	$setting['search_show_num'];
 
-		// 赋值基本信息
-		$title		=	$setting['web_title'];
+		// 获取meta
+		$meta 				=	getMeta('siteinfoSearch','','','');
 
-		$webTitle 	=	"搜索-".$title;
-		$webDescription		=	'';
-		$webKeywords		=	'';
 
 		// 菜单
 		$menu	=	Model('Menu')
     					->order('top asc')
-    					// ->cache('menu',$cacheTime)
     					->select();
 
-    	// 获取搜索系统配置
-    	$searchShowType		=	$setting['search_show_type'];
-    	$searchShowNum		=	$setting['search_show_num'];
+ 
 
     	// 根据展示类型来查找
     	switch ($searchShowType) {
@@ -188,12 +179,10 @@ class Search extends Controller{
     	}
     	
 
-    	$this->assign('title',$title);
     	$this->assign('webTitle',$webTitle);
-    	$this->assign('webKeywords',$webKeywords);
-    	$this->assign('webDescription',$webDescription);
     	$this->assign('tongji_code',$tongji_code);
     	$this->assign('webUrl',$webUrl);
+    	$this->assign('meta',$meta);
 
     	$this->assign('menu',$menu);
     	$this->assign('searchShowArr',$searchShowArr);

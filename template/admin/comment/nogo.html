@@ -1,10 +1,11 @@
 {include file="../template/admin/common/header.html"}
 <div class="container">
 	<ul class="list-group">
-		<li class="list-group-item active del-btn">
-			<a href="{:url('admin/comment/nogo')}">
-				查看未审核评论
-			</a>
+		<li class="list-group-item active">
+			总数量：{$count}
+			<span class="btn btn-sm btn-warning" onclick="window.location.href='{:url("admin/comment/index")}'" style="float: right;">
+				取消查看
+			</span>
 		</li>
 		{volist name="commentArr" id="commentArr"}
 			<li class="list-group-item">
@@ -35,7 +36,7 @@
 				</span>
 			</li>
 		{/volist}
+		{$pageination->render()}
 	</ul>
-	{$pageination->render()}
 </div>
 {include file="../template/admin/common/footer.html"}

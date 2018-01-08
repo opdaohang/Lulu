@@ -116,7 +116,7 @@ function common(e){
 	var userurl		=	$('input[name="userurl"]').val();
 	// id
 	var post_id		=	$('input[name="post_id"]').val();
-	// 获取验证码
+	// 获取验证码  
 	var yzm 		=	$('input[name="yzm"]').val();
 
 	var tip 		=	$('.addurl-tips');
@@ -145,3 +145,81 @@ function common(e){
 	});
 	return false;		
 }
+
+// 文章搜索search 
+$(document).delegate('#article-search','click',function(){
+	$('#article-search-li').fadeToggle(600);
+	$("#article-search-no").fadeToggle(600);
+});
+$(document).delegate('#article-search-no','click',function(){
+	$('#article-search-li').fadeToggle(600);
+	$(this).fadeToggle(600);
+	setTimeout(function(){
+		window.location.href = window.location.href;
+	},1000);
+	
+});
+// 绑定form
+$(document).delegate('#article-search-form','submit',function(){
+
+	// 设置disable
+	$('#article-search-btn').attr("disabled","disabled");
+	// 开始倒计时
+	var timer = 4;
+
+	var dingshi = setInterval(function(){
+		timer--;
+		if(timer <= 0){
+			$('#article-search-btn').val("搜索").attr('disabled',false);
+			setTimeout(function(){
+				clearInterval(dingshi);
+			},200);
+			return false;
+		}
+		// 设置html
+		$('#article-search-btn').val("请等待"+timer);
+	},1000);
+
+
+
+	// 获取url
+	var url = $(this).attr('action');
+	// 获取搜索框内容
+	var val = $(document).find('input[name="search"]').val()
+	// 获取ajax区域
+	var ajaxContent = $('#list-ajax');
+
+	// 开始ajax
+	$.ajax({
+		url:url,
+		type:'post',
+		data:{'wd':val},
+		success:function(msg){
+			$('body,html').animate({scrollTop:'0px'},300);
+			ajaxContent.html(msg);
+		}
+	});
+
+	// 绑定this
+	$(document).delegate('#ajax-page a','click',function(){
+		var href = this.href;
+		// ajax访问
+		$.ajax({
+			url:href,
+			success:function(data){
+				$('body,html').animate({scrollTop:'0px'},300);
+				ajaxContent.html(data);
+			}
+		});
+		return false;
+	});
+	return false;
+});
+// 返回顶部点击
+$(document).delegate('.goTop','click',function(){
+	// 获取导航栏高度
+	var navHei 	=	$('.common-nav').css('height');
+
+	$('html,body').animate({scrollTop:'0px'},300);
+
+});

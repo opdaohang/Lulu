@@ -138,6 +138,15 @@ function postFw(e,m){
 		zu[name] = val;
 	}
 
+	// 开始设置按钮为禁止点击
+	var btn  = $(document).find('input[type="submit"]');
+
+	btn.attr('disabled',true);
+
+	setTimeout(function(){
+		btn.attr('disabled',false);
+	},1000);
+
 
 	// 开始提交
 	$.ajax({
@@ -251,3 +260,4 @@ function search(e){
 
 	return false;
 }
+

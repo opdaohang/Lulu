@@ -20,7 +20,7 @@ class Mz extends Controller{
 		}
 
 		// 获取系统参数
-		$setting 	=	Model('Setting')->get(1)->toArray();
+		$setting 		=	getSetting();
 
 		// 获取limit
 		$common_limit	=	$setting['admin_limit_num'];
@@ -91,8 +91,7 @@ class Mz extends Controller{
 			$this->redirect(url('admin/login/index'));
 		}
 
-		$data = input();
-		unset($data['/admin/mz/editadmin']);
+		$data = input('post.');
 		
 		$update = Model('Mztj')->where('id',$data['id'])->update($data);
 

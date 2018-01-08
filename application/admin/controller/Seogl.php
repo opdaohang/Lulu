@@ -20,7 +20,7 @@ class Seogl extends Controller {
 		}
 
 		// 获取setting信息
-		$setting	=	Model('Setting')->where('id',1)->find()->toArray();
+		$setting		=	getSetting();
 
 		// 分页数量
 		$common_limit	=	$setting['admin_limit_num'];	

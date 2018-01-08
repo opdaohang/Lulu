@@ -20,22 +20,23 @@ class Comment extends Controller {
 		}
 
 		// 获取setting信息
-		$setting	=	Model('Setting')->where('id',1)->find()->toArray();
+		$setting		=	getSetting();
 
 		// 分页数量
 		$common_limit	=	$setting['admin_limit_num'];
 
 		// 评论
-		$commentArr	=	Model('Common')
-							->order('id desc')
-							->limit($common_limit)
-							->page($page)
-							->select();
+		$commentArr		=	Model('Common')
+								->order('id desc')
+								->limit($common_limit)
+								->page($page)
+								->select();
 		// 分页
 		$pageination	=	Model('Common')->paginate($common_limit);
 
 		$this->assign('commentArr',$commentArr);
 		$this->assign('pageination',$pageination);
+
 		return view();
 	}
 	// 更改审核状态
@@ -73,6 +74,49 @@ class Comment extends Controller {
 			$this->success('删除失败');
 		}
 
+	}
+
+	// 未审核评论
+	public function nogo(){
+		// 判断session
+		if(session::get('administer') != 1 || !session::has('administer')){
+			$this->redirect(url('admin/login/index'));
+		}
+
+		if(!input('page')){
+			$page = 1;
+		}else{
+			$page = input('page');
+		}
+
+		// 获取setting信息
+		$setting		=	getSetting();
+
+		// 分页数量
+		$common_limit	=	$setting['admin_limit_num'];
+
+		// 
+		$result			=	Model('Common')
+								->where('status',0)
+								->order('id desc')
+								->limit($common_limit)
+								->page($page)
+								->select();
+
+		$pageination	=	Model('Common')
+								->where('status',0)
+								->order('id desc')
+								->paginate($common_limit);
+
+		$count 			=	Model('Common')
+								->where('status',0)
+								->count();
+
+		$this->assign('commentArr',$result);
+		$this->assign('pageination',$pageination);
+		$this->assign('count',$count);
+
+		return view();
 	}
 }
 

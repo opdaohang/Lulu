@@ -20,17 +20,17 @@ class Links extends Controller {
 		}
 
 		// 获取setting信息
-		$setting	=	Model('Setting')->where('id',1)->find()->toArray();
+		$setting		=	getSetting();
 
 		// 分页数量
 		$common_limit	=	$setting['admin_limit_num'];
 
 		// 获取所有友情链接
-		$linkArr	=	Model('Links')
-							->order('id asc')
-							->limit($common_limit)
-							->page($page)
-							->select();
+		$linkArr		=	Model('Links')
+								->order('id asc')
+								->limit($common_limit)
+								->page($page)
+								->select();
 
 		// 分页
 		$pageination	=	Model('Links')->paginate($common_limit);

@@ -28,8 +28,8 @@
 					<small style="color: #999;">无描述</small>
 				{/if}
 				<!-- <small style="color: #ff0000;" id="status"></small> -->
-				<span class="btn btn-sm btn-success del-btn" style="float: right; margin-left: 10px;">
-					<a href="{:url('admin/all/del',['id'=>$all.id])}">
+				<span class="btn btn-sm btn-danger del-btn" style="float: right; margin-left: 10px;">
+					<a href="javascript:" onclick="getFw('{:url("admin/all/del",["id"=>$all.id])}','删除')">
 						删除
 					</a>
 				</span>
@@ -40,18 +40,18 @@
 				</span>
 				{if $all.status eq 1}
 					<span class="btn btn-sm btn-success del-btn" style="float: right;margin-left: 10px;">
-						<a href="{:url('admin/all/status',['id'=>$all.id])}">
+						<a href="javascript:" onclick="getFw('{:url("admin/all/status",["id"=>$all.id])}','状态更改')">
 							取消审核
 						</a>
 					</span>
 				{else /}
 					<span class="btn btn-sm btn-danger del-btn" style="float: right;margin-left: 10px;">
-						<a href="{:url('admin/all/status',['id'=>$all.id])}">
+						<a href="javascript:" onclick="getFw('{:url("admin/all/status",["id"=>$all.id])}','状态更改')">
 							审核
 						</a>
 					</span>
 				{/if}
-				<span class="btn btn-sm btn-danger del-btn" style="float: right;" onclick="updateJbxx('{:url("admin/all/jbxx",["type"=>"id","id"=>$all.id])}')">
+				<span class="btn btn-sm btn-success del-btn" style="float: right;" onclick="updateJbxx('{:url("admin/all/jbxx",["type"=>"id","id"=>$all.id])}')">
 						更新信息
 				</span>
 				

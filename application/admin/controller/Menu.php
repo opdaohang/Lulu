@@ -19,7 +19,7 @@ class Menu extends Controller{
 		}
 
 		// 获取系统设置
-		$setting 		= Model('Setting')->get(1)->toArray();
+		$setting 		=   getSetting();
 
 		$common_limit 	=	$setting['admin_limit_num'];
 

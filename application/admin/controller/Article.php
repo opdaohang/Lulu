@@ -19,7 +19,7 @@ class Article extends Controller {
 		}
 
 		// 获取setting信息
-		$setting		=	Model('Setting')->where('id',1)->find()->toArray();
+		$setting		=	getSetting();
 
 		// 分页数量
 		$common_limit	=	$setting['admin_limit_num'];
@@ -39,13 +39,6 @@ class Article extends Controller {
 		$this->assign('pageination',$pageination);
 
 		return view();
-	}
-	// 预览
-	public function look($id){
-		// 判断session
-		if(session::get('administer') != 1 || !session::has('administer')){
-			$this->redirect(url('admin/login/index'));
-		}
 	}
 	// 更改状态
 	public function status($id){
@@ -187,7 +180,7 @@ class Article extends Controller {
 		}
 
 		// 获取setting信息
-		$setting		=	Model('Setting')->where('id',1)->find()->toArray();
+		$setting		=	getSetting();
 
 		// 分页数量
 		$common_limit	=	$setting['admin_limit_num'];
