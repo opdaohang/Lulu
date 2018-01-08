@@ -121,6 +121,9 @@ function common(e){
 
 	var tip 		=	$('.addurl-tips');
 
+	// 设置为禁止点击
+	$(document).find("input[type='submit']").attr('disabled',true);
+
 
 	// 开始提交
 	$.ajax({
@@ -135,6 +138,7 @@ function common(e){
 			}
 			setTimeout(function(){
 				tip.fadeOut(800);
+				$(document).find("input[type='submit']").attr('disabled',false);
 			},1500);
 			if(msg['code'] == 1){
 				setTimeout(function(){

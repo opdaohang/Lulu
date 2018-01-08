@@ -134,7 +134,7 @@ function article(e){
 	}
 
 	// 设置为禁止点击
-	$('#btns').attr('disabled',true);
+	$(document).find('#btns').attr('disabled',true);
 
 	// 取消点击
 	setTimeout(function(){
@@ -156,6 +156,7 @@ function article(e){
 				
 			}else{
 				tips.html('添加失败').fadeIn(500);
+				$(document).find('#btns').attr('disabled',false);
 			}
 			setTimeout(tips.fadeOut(1000),3000);
 		}
