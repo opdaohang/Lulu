@@ -266,6 +266,9 @@
 	padding-top: 10px;
 	padding-bottom: 10px;
 }
+.article-content embed {
+	width: 100%;
+}
 /**/
 .article-common {
 
