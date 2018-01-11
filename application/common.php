@@ -202,6 +202,7 @@ function getMeta($type,$p=1,$id=1,$wd=null){
  			$result 			   .= '<meta name="keywords" content="'.$articleKeywords.'">'.$brs;
  			$result  			   .= '<meta name="description" content="'.$articleDescription.'">'.$brs;
  			$result  			   .= '<meta name="robots" content="index,nofollow">'.$brs;
+ 			$result 			   .= '<base target="_blank">'.$brs;
  		break;
  		default:
  			$result = false;
