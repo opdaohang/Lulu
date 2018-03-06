@@ -6,11 +6,13 @@ use think\Model;
 use think\Session;
 
 class Index extends Controller{
-	public function index(){
+	public function _initialize(){
 		// 判断session
 		if(session::get('administer') != 1 || !session::has('administer')){
 			$this->redirect(url('admin/login/index'));
 		}
+	}
+	public function index(){
 
 		// 获取已审核站点数量
 		$already	=	Model('Url')->where('status',1)->count();

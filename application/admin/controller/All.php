@@ -6,12 +6,13 @@ use think\Session;
 use think\Model;
 
 class All extends Controller {
-	public function index(){
+	public function _initialize(){
 		// 判断session
 		if(session::get('administer') != 1 || !session::has('administer')){
 			$this->redirect(url('admin/login/index'));
 		}
-
+	}
+	public function index(){
 		// 判断page
 		if(!input('?page')){
 			$page = 1;
@@ -43,12 +44,6 @@ class All extends Controller {
 	}
 	// 删除
 	public function del($id){
-		// 判断session
-		if(session::get('administer') != 1 || !session::has('administer')){
-			$this->redirect(url('admin/login/index'));
-		}
-
-
 		$delete = Model('Url')->where('id',$id)->delete();
 		if($delete){
 			$this->success('删除成功','admin/all/index');
@@ -58,10 +53,6 @@ class All extends Controller {
 	}
 	// 状态
 	public function status($id){
-		// 判断session
-		if(session::get('administer') != 1 || !session::has('administer')){
-			$this->redirect(url('admin/login/index'));
-		}
 
 		// 获取状态
 		$statusArr = Model('Url')->get($id)->toArray();
@@ -111,14 +102,6 @@ class All extends Controller {
 	}
 	// 基本信息
 	public function jbxx($type,$id){
-// 		set_time_limit(0);
-
-
-
-		// 判断session
-		if(session::get('administer') != 1 || !session::has('administer')){
-			$this->redirect(url('admin/login/index'));
-		}
 
 		if($type == 'id'){
 			// 根据id获取基本信息
@@ -243,10 +226,6 @@ class All extends Controller {
 	}
 	// 添加
 	public function allinsert(){
-		// 判断session
-		if(session::get('administer') != 1 || !session::has('administer')){
-			$this->redirect(url('admin/login/index'));
-		}
 
 		$data = input();
 
@@ -291,11 +270,6 @@ class All extends Controller {
 
 	// 编辑
 	public function edit($id){
-		// 判断session
-		if(session::get('administer') != 1 || !session::has('administer')){
-			$this->redirect(url('admin/login/index'));
-		}
-
 
 		// 根据ID获取信息
 		$message = Model('Url')->get($id);
@@ -319,11 +293,6 @@ class All extends Controller {
 	}
 	// edit admin
 	public function editadmin(){
-		// 判断session
-		if(session::get('administer') != 1 || !session::has('administer')){
-			$this->redirect(url('admin/login/index'));
-		}
-
 		$data = input('post.');
 		if(!$data){
 			exit;
@@ -337,10 +306,6 @@ class All extends Controller {
 	}
 	// 查询是否有此网址
 	public function repeat(){
-		// 判断session
-		if(session::get('administer') != 1 || !session::has('administer')){
-			$this->redirect(url('admin/login/index'));
-		}
 		
 		$data =	input('post.');
 		$url  = $data['url'];

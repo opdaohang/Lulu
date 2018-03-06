@@ -6,11 +6,13 @@ use think\Controller;
 use think\Model;
 
 class Comment extends Controller {
-	public function index(){
+	public function _initialize(){
 		// 判断session
 		if(session::get('administer') != 1 || !session::has('administer')){
 			$this->redirect(url('admin/login/index'));
 		}
+	}
+	public function index(){
 
 		// 判断page
 		if(!input('?page')){
@@ -41,10 +43,6 @@ class Comment extends Controller {
 	}
 	// 更改审核状态
 	public function status($id){
-		// 判断session
-		if(session::get('administer') != 1 || !session::has('administer')){
-			$this->redirect(url('admin/login/index'));
-		}
 
 		// 获取状态
 		$status = Model('Common')->get($id)->toArray();
@@ -62,10 +60,6 @@ class Comment extends Controller {
 	}
 	// 删除
 	public function del($id){
-		// 判断session
-		if(session::get('administer') != 1 || !session::has('administer')){
-			$this->redirect(url('admin/login/index'));
-		}
 
 		$del = Model('Common')->where('id',$id)->delete();
 		if($del){
@@ -78,10 +72,6 @@ class Comment extends Controller {
 
 	// 未审核评论
 	public function nogo(){
-		// 判断session
-		if(session::get('administer') != 1 || !session::has('administer')){
-			$this->redirect(url('admin/login/index'));
-		}
 
 		if(!input('page')){
 			$page = 1;

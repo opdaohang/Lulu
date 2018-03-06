@@ -6,12 +6,14 @@ use think\Session;
 use think\Model;
 
 class Seogl extends Controller {
-	public function index(){
+	public function _initialize(){
 		// 判断session
 		if(session::get('administer') != 1 || !session::has('administer')){
 			$this->redirect(url('admin/login/index'));
 		}
-
+	}
+	public function index(){
+	
 		// 判断page
 		if(!input('?page')){
 			$page = 1;
@@ -43,10 +45,6 @@ class Seogl extends Controller {
 		return view();
 	}
 	public function del($id){
-		// 判断session
-		if(session::get('administer') != 1 || !session::has('administer')){
-			$this->redirect(url('admin/login/index'));
-		}
 
 		$del	=	Model('Seo')->where('id',$id)->delete();
 		if($del){

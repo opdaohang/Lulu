@@ -6,12 +6,13 @@ use think\Session;
 use think\Model;
 
 class Setting extends Controller{
-	public function index(){
-
+	public function _initialize(){
 		// 判断session
 		if(session::get('administer') != 1 || !session::has('administer')){
 			$this->redirect(url('admin/login/index'));
 		}
+	}
+	public function index(){
 
 		// 获取系统信息
 		$setting = Model('Setting')->get(1);
@@ -22,10 +23,6 @@ class Setting extends Controller{
 	}
 	// 
 	public function edit(){
-		// 判断session
-		if(session::get('administer') != 1 || !session::has('administer')){
-			$this->redirect(url('admin/login/index'));
-		}
 		
 		$data = input('post.');
 

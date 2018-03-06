@@ -5,11 +5,13 @@ use think\Session;
 use think\Controller;
 
 class Article extends Controller {
-	public function index(){
+	public function _initialize(){
 		// 判断session
 		if(session::get('administer') != 1 || !session::has('administer')){
 			$this->redirect(url('admin/login/index'));
 		}
+	}
+	public function index(){
 
 		// 判断page
 		if(!input('?page')){
@@ -42,11 +44,6 @@ class Article extends Controller {
 	}
 	// 更改状态
 	public function status($id){
-		// 判断session
-		if(session::get('administer') != 1 || !session::has('administer')){
-			$this->redirect(url('admin/login/index'));
-		}
-
 		$message = Model('Article')->get($id)->toArray();
 
 		if($message['status'] == 1){
@@ -63,11 +60,6 @@ class Article extends Controller {
 	}
 	// 删除
 	public function del($id){
-		// 判断session
-		if(session::get('administer') != 1 || !session::has('administer')){
-			$this->redirect(url('admin/login/index'));
-		}
-
 		$del = Model('Article')->where('id',$id)->delete();
 		if($del){
 			$this->success('成功');
@@ -77,10 +69,6 @@ class Article extends Controller {
 	}
 	// 添加
 	public function insert(){
-		// 判断session
-		if(session::get('administer') != 1 || !session::has('administer')){
-			$this->redirect(url('admin/login/index'));
-		}
 
 		$data = input();
 
@@ -116,10 +104,6 @@ class Article extends Controller {
 	}
 	// 编辑
 	public function edit($id){
-		// 判断session
-		if(session::get('administer') != 1 || !session::has('administer')){
-			$this->redirect(url('admin/login/index'));
-		}
 
 		// 获取信息
 		$message = Model('Article')->get($id)->toArray();
@@ -134,10 +118,6 @@ class Article extends Controller {
 	}
 	// 更新
 	public function update(){
-		// 判断session
-		if(session::get('administer') != 1 || !session::has('administer')){
-			$this->redirect(url('admin/login/index'));
-		}
 
 		$data = input('post.');
 		if(!$data){
@@ -167,10 +147,6 @@ class Article extends Controller {
 	}
 	// 查看所有未审核
 	public function nogo(){
-		// 判断session
-		if(session::get('administer') != 1 || !session::has('administer')){
-			$this->redirect(url('admin/login/index'));
-		}
 
 		// 判断page
 		if(!input('?page')){

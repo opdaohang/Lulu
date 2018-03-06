@@ -6,11 +6,13 @@ use think\Session;
 use think\Model;
 
 class Searchgl extends Controller {
-	public function index(){
+	public function _initialize(){
 		// 判断session
 		if(session::get('administer') != 1 || !session::has('administer')){
 			$this->redirect(url('admin/login/index'));
 		}
+	}
+	public function index(){
 
 		// 判断page
 		if(!input('?page')){
@@ -43,10 +45,6 @@ class Searchgl extends Controller {
 		return view();
 	}
 	public function del($id){
-		// 判断session
-		if(session::get('administer') != 1 || !session::has('administer')){
-			$this->redirect(url('admin/login/index'));
-		}
 		$del	=	Model('Search')->where('id',$id)->delete();
 		if($del){
 			$this->success('删除成功');

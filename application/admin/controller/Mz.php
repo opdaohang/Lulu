@@ -6,12 +6,13 @@ use think\Session;
 use think\Model;
 
 class Mz extends Controller{
-	public function index(){
+	public function _initialize(){
 		// 判断session
 		if(session::get('administer') != 1 || !session::has('administer')){
 			$this->redirect(url('admin/login/index'));
 		}
-
+	}
+	public function index(){
 		// 判断page
 		if(!input('?page')){
 			$page = 1;
@@ -39,10 +40,6 @@ class Mz extends Controller{
 	}
 	// 删除
 	public function del($id){
-		// 判断session
-		if(session::get('administer') != 1 || !session::has('administer')){
-			$this->redirect(url('admin/login/index'));
-		}
 
 		$del = Model('Mztj')->where('id',$id)->delete();
 
@@ -54,10 +51,6 @@ class Mz extends Controller{
 	}
 	// 状态
 	public function insert(){
-		// 判断session
-		if(session::get('administer') != 1 || !session::has('administer')){
-			$this->redirect(url('admin/login/index'));
-		}
 
 		$data = input();
 		unset($data['/admin/mz/insert']);
@@ -71,10 +64,6 @@ class Mz extends Controller{
 	}
 	// 编辑
 	public function edit($id){
-		// 判断session
-		if(session::get('administer') != 1 || !session::has('administer')){
-			$this->redirect(url('admin/login/index'));
-		}
 
 		// 获取信息
 		$message = Model('Mztj')->get($id);
@@ -86,10 +75,6 @@ class Mz extends Controller{
 	}
 	// 
 	public function editadmin(){
-		// 判断session
-		if(session::get('administer') != 1 || !session::has('administer')){
-			$this->redirect(url('admin/login/index'));
-		}
 
 		$data = input('post.');
 		

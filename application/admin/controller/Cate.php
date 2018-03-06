@@ -7,12 +7,13 @@ use think\Model;
 use think\Session;
 
 class Cate extends Controller {
-	public function index(){
+	public function _initialize(){
 		// 判断session
 		if(session::get('administer') != 1 || !session::has('administer')){
 			$this->redirect(url('admin/login/index'));
 		}
-
+	}
+	public function index(){
 		// 判断page
 		if(!input('?page')){
 			$page = 1;
@@ -49,11 +50,6 @@ class Cate extends Controller {
 	}
 	// 添加分类
 	public function cateinsert(){
-		// 判断session
-		if(session::get('administer') != 1 || !session::has('administer')){
-			$this->redirect(url('admin/login/index'));
-		}
-
 		
 		// 判断是否有
 		if(!input('post.')){
@@ -85,10 +81,6 @@ class Cate extends Controller {
 	}
 	// 删除
 	public function catedel($id){
-		// 判断session
-		if(session::get('administer') != 1 || !session::has('administer')){
-			$this->redirect(url('admin/login/index'));
-		}
 		
 		$del = Model('Cate')->where('id',$id)->delete();
 		if($del){
@@ -112,12 +104,7 @@ class Cate extends Controller {
 	}
 	// 分类编辑
 	public function cateedit($id){
-		// 判断session
-		if(session::get('administer') != 1 || !session::has('administer')){
-			$this->redirect(url('admin/login/index'));
-		}
 
-		// 
 		// 根据id获取信息
 		$message = Model('Cate')->get($id);
 
@@ -128,12 +115,6 @@ class Cate extends Controller {
 	}
 	// 分类编辑提交
 	public function editadmin(){
-		// 判断session
-		if(session::get('administer') != 1 || !session::has('administer')){
-			$this->redirect(url('admin/login/index'));
-		}
-
-
 		$data = input();
 		unset($data['/admin/cate/editadmin']);
 

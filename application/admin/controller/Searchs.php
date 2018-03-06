@@ -5,12 +5,13 @@ use think\Session;
 use think\Controller;
 
 class Searchs extends Controller {
-	public function index(){
+	public function _initialize(){
 		// 判断session
 		if(session::get('administer') != 1 || !session::has('administer')){
 			$this->redirect(url('admin/login/index'));
 		}
-
+	}
+	public function index(){
 		// 
 		$data = input();
 		if(!$data || empty($data)){
@@ -53,11 +54,6 @@ class Searchs extends Controller {
 	}
 	// 文章搜索
 	public function article(){
-		// 判断session
-		if(session::get('administer') != 1 || !session::has('administer')){
-			$this->redirect(url('admin/login/index'));
-		}
-
 		$data = input('get.');
 
 		if(empty($data['search'])){

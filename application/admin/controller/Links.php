@@ -6,12 +6,13 @@ use think\Session;
 use think\Model;
 
 class Links extends Controller {
-	public function index(){
+	public function _initialize(){
 		// 判断session
 		if(session::get('administer') != 1 || !session::has('administer')){
 			$this->redirect(url('admin/login/index'));
 		}
-
+	}
+	public function index(){
 		// 判断page
 		if(!input('?page')){
 			$page = 1;
@@ -40,11 +41,6 @@ class Links extends Controller {
 		return view();
 	}
 	public function linksinsert(){
-		// 判断session
-		if(session::get('administer') != 1 || !session::has('administer')){
-			$this->redirect(url('admin/login/index'));
-		}
-
 		$data	=	input('post.');
 
 		$insert =	Model('Links')->insert($data);
@@ -56,10 +52,6 @@ class Links extends Controller {
 		}
 	}
 	public function del($id){
-		// 判断session
-		if(session::get('administer') != 1 || !session::has('administer')){
-			$this->redirect(url('admin/login/index'));
-		}
 
 		$del	=	Model('Links')->where('id',$id)->delete();
 
@@ -70,10 +62,6 @@ class Links extends Controller {
 		}
 	}
 	public function edit($id){
-		// 判断session
-		if(session::get('administer') != 1 || !session::has('administer')){
-			$this->redirect(url('admin/login/index'));
-		}
 		// 根据id获取信息
 		$message	=	Model('Links')->get($id);
 
@@ -82,10 +70,6 @@ class Links extends Controller {
 		return view();
 	}
 	public function update(){
-		// 判断session
-		if(session::get('administer') != 1 || !session::has('administer')){
-			$this->redirect(url('admin/login/index'));
-		}
 
 		$data	=	input('post.');
 		$update	=	Model('Links')->where('id',$data['id'])->update($data);

@@ -6,11 +6,13 @@ use think\Session;
 use think\Model;
 
 class Menu extends Controller{
-	public function index(){
+	public function _initialize(){
 		// 判断session
 		if(session::get('administer') != 1 || !session::has('administer')){
 			$this->redirect(url('admin/login/index'));
 		}
+	}
+	public function index(){
 
 		if(!input('?page')){
 			$page 		= 1;
@@ -37,10 +39,6 @@ class Menu extends Controller{
 	}
 	// 添加
 	public function inserts(){
-		// 判断session
-		if(session::get('administer') != 1 || !session::has('administer')){
-			$this->redirect(url('admin/login/index'));
-		}
 
 		$data = input();
 		unset($data['/admin/menu/inserts']);
@@ -55,10 +53,6 @@ class Menu extends Controller{
 	}
 	// 删除
 	public function del($id){
-		// 判断session
-		if(session::get('administer') != 1 || !session::has('administer')){
-			$this->redirect(url('admin/login/index'));
-		}
 
 		$del = Model('Menu')->where('id',$id)->delete();
 		if($del){
@@ -68,10 +62,6 @@ class Menu extends Controller{
 		}
 	}
 	public function edit($id){
-		// 判断session
-		if(session::get('administer') != 1 || !session::has('administer')){
-			$this->redirect(url('admin/login/index'));
-		}
 
 		// 获取信息
 		$message = Model('Menu')->get($id);
