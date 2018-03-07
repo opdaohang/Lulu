@@ -80,7 +80,7 @@ class Menu extends Controller{
 		if($update){
 			$this->success('修改成功',url('admin/menu/index'));
 		}else{
-			$this->success('修改失败',url('admin/menu/index'));
+			$this->error('修改失败',url('admin/menu/index'));
 		}
 	}
 	public function _empty(){

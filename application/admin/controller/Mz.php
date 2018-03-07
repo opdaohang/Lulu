@@ -27,10 +27,10 @@ class Mz extends Controller{
 		$common_limit	=	$setting['admin_limit_num'];
 
 		// 获取根据分页所有站点
-		$all = Model('Mztj')->order('id desc')->limit($common_limit)->page($page)->select();
+		$all 			= 	Model('Mztj')->order('id desc')->limit($common_limit)->page($page)->select();
 
 		// 获取分页
-		$pageination = Model('Mztj')->order('id desc')->paginate($common_limit);
+		$pageination 	= 	Model('Mztj')->order('id desc')->paginate($common_limit);
 
 		// 赋值
 		$this->assign('all',$all);
@@ -46,7 +46,7 @@ class Mz extends Controller{
 		if($del){
 			$this->success('删除成功','admin/mz/index');
 		}else{
-			$this->success('删除失败','admin/mz/index');
+			$this->error('删除失败','admin/mz/index');
 		}
 	}
 	// 状态
@@ -59,7 +59,7 @@ class Mz extends Controller{
 		if($insert){
 			$this->success('添加成功','admin/mz/index');
 		}else{
-			$this->success('添加成功','admin/mz/index');
+			$this->error('添加成功','admin/mz/index');
 		}
 	}
 	// 编辑
@@ -76,14 +76,14 @@ class Mz extends Controller{
 	// 
 	public function editadmin(){
 
-		$data = input('post.');
+		$data 	= 	input('post.');
 		
-		$update = Model('Mztj')->where('id',$data['id'])->update($data);
+		$update = 	Model('Mztj')->where('id',$data['id'])->update($data);
 
 		if($update){
 			$this->success('修改成功','admin/mz/index');
 		}else{
-			$this->success('修改失败','admin/mz/index');
+			$this->error('修改失败','admin/mz/index');
 		}
 	}
 	public function _empty(){

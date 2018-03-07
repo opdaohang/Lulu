@@ -31,7 +31,7 @@ class Setting extends Controller{
 		if($update){
 			$this->success('更新成功','admin/setting/index');
 		}else{
-			$this->success('更新失败','admin/setting/index');
+			$this->error('更新失败','admin/setting/index');
 		}
 	} 
 	public function _empty(){

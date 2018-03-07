@@ -28,11 +28,11 @@ class Seogl extends Controller {
 		$common_limit	=	$setting['admin_limit_num'];	
 
 		// 获取所有SEOURL
-		$urlArr	=	Model('Seo')
-						->order('id desc')
-						->limit($common_limit)
-						->page($page)
-						->select();
+		$urlArr			=	Model('Seo')
+							->order('id desc')
+							->limit($common_limit)
+							->page($page)
+							->select();
 		// 分页
 		$pageination	=	Model('Seo')->paginate($common_limit);
 		// 总数量

@@ -53,7 +53,7 @@ class Cate extends Controller {
 		
 		// 判断是否有
 		if(!input('post.')){
-			$this->success('没有变量','admin/cate/index');
+			$this->error('没有变量','admin/cate/index');
 		}else{
 			$data = input();
 		}
@@ -62,13 +62,13 @@ class Cate extends Controller {
 		unset($data['/admin/cate/cateinsert']);
 
 		if(empty($data['title'])){
-			$this->success('不能为空','admin/cate/index');
+			$this->error('不能为空','admin/cate/index');
 		}
 
 		// 判断是否有同样命名分类
 		$same = Model('Cate')->where('title',$data['title'])->find();
 		if($same){
-			$this->success('已经有此分类','admin/cate/index');
+			$this->error('已经有此分类','admin/cate/index');
 			exit;
 		}
 		// 开始添加
@@ -76,7 +76,7 @@ class Cate extends Controller {
 		if($insert){
 			$this->success('添加成功','admin/cate/index');
 		}else{
-			$this->success('添加失败','admin/cate/index');
+			$this->error('添加失败','admin/cate/index');
 		}
 	}
 	// 删除
@@ -91,14 +91,14 @@ class Cate extends Controller {
 				if($del){
 				$this->success('成功(子站点)','admin/cate/index');
 				}else{
-					$this->success('失败(子站点)','admin/cate/index');
+					$this->error('失败(子站点)','admin/cate/index');
 				}
 			}else{
 				$this->success('删除成功','admin/cate/index');
 			}
 			
 		}else{
-			$this->success('失败(大分类)','admin/cate/index');
+			$this->error('失败(大分类)','admin/cate/index');
 		}
 		
 	}
@@ -122,7 +122,7 @@ class Cate extends Controller {
 		if($update){
 			$this->success('更新成功','admin/cate/index');
 		}else{
-			$this->success('更新失败)','admin/cate/index');
+			$this->error('更新失败)','admin/cate/index');
 		}
 	}
 	public function _empty(){

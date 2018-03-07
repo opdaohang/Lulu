@@ -57,7 +57,7 @@ class Searchs extends Controller {
 		$data = input('get.');
 
 		if(empty($data['search'])){
-			$this->success('非法闯入');
+			$this->error('非法闯入');
 		}else{
 			$wd = $data['search'];
 		}

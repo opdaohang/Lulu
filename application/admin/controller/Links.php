@@ -76,7 +76,7 @@ class Links extends Controller {
 		if($update){
 			$this->success('更新成功',url('admin/links/index'));
 		}else{
-			$this->success('更新失败',url('admin/links/index'));
+			$this->error('更新失败',url('admin/links/index'));
 		}
 	}
 	public function _empty(){
