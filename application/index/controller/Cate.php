@@ -54,12 +54,10 @@ class Cate extends Controller{
 		// 获取菜单
     	$menu	=	Model('Menu')
     					->order('top asc')
-    					// ->cache('menu',$cacheTime)
     					->select();
     	// 获取所有的分类
     	$cate 	= 	Model('Cate')
     					->order('id asc')
-    					// ->cache('cate',$cacheTime)
     					->select();
 
     	// 获取分类为这个的所有网站

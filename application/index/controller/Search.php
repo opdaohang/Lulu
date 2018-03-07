@@ -81,7 +81,7 @@ class Search extends Controller{
 		// 插入搜索数据
 		if($page == 1){
 			// 判断是否存在
-			$searchExits	=	Model('Search')->where('wd',$wd)->count();
+			$searchExits		=	Model('Search')->where('wd',$wd)->count();
 			if($searchExits == 0){
 				// 准备插入的数据
 				$data	=	['wd'=>$wd,'num'=>0];

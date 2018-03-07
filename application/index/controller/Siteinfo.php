@@ -50,20 +50,20 @@ class Siteinfo extends Controller{
     	
 
     	// 获取菜单
-    	$menu	=	Model('Menu')
-    					->order('top asc')
-    					->select();
+    	$menu	         =	Model('Menu')
+            					->order('top asc')
+            					->select();
 
     	// 根据cate id获取分类目录
     	$cateNameArr	=	Model('Cate')->get($urlArr['cate'])->toArray();
     	$cateName		=	$cateNameArr['title'];
 
     	// 猜你喜欢 
-    	$cai 	=	Model('Url')
-    					->where('status',1)
-    					->limit($likeNum)
-    					->order('rand()')
-    					->select();
+    	$cai 	         =	Model('Url')
+            					->where('status',1)
+            					->limit($likeNum)
+            					->order('rand()')
+            					->select();
 
 
     	// 快速审核 ** 根据类型来获取
